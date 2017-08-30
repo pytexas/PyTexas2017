@@ -1,0 +1,101 @@
+<!doctype html>{% load static %}
+<html lang="en">
+  <head>
+    <!-- Release: {{ release }} -->
+    <title>{{ site.name }}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="voice powered learning assistant">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "apple-touch-icon.png" %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static "favicon-32x32.png" %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static "favicon-16x16.png" %}">
+    <link rel="manifest" href="{% static "manifest.json" %}">
+    <link rel="mask-icon" href="{% static "safari-pinned-tab.svg" %}" color="#009688">
+    <link rel="shortcut icon" href="{% static "favicon.ico" %}">
+    <meta name="apple-mobile-web-app-title" content="Neutron">
+    <meta name="application-name" content="Neutron">
+    <meta name="msapplication-config" content="{% static "browserconfig.xml" %}">
+    <meta name="theme-color" content="#009688">
+    
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      
+      #splash {
+        height: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      #splash img {
+        width: 128px;
+      }
+      
+      #app {
+        display: none;
+      }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Roboto+Slab" rel="stylesheet">
+    {% for css in files.css %}
+    <link rel="stylesheet" href="{% static css %}">{% endfor %}
+    {% for js in files.js_head %}
+    <script src="{% static js %}"></script>{% endfor %}
+  </head>
+  <body class="md-theme-default">
+    <div id="splash">
+      <img src="{% static "img/banner80.png" %}" alt="{{ site.name }}">
+    </div>
+    <div id="app">
+      <md-toolbar>
+        <div>
+          <router-link :to="{name: 'home'}">
+            <img src="{% static "icon.svg" %}">
+          </router-link>
+          <h2>
+            <router-link :to="{name: 'home'}">
+              <span>{{ site.name }}</span>
+            </router-link>
+          </h2>
+          <nac-nav ref="nav"></nav-nav>
+        </div>
+      </md-toolbar>
+      <md-progress v-if="loading" class="md-accent main" md-indeterminate></md-progress>
+      <div id="content">
+        <router-view></router-view>
+      </div>
+      <footer>
+        
+      </footer>
+    </div>
+    <script>
+      var DEBUG = {% if debug %}true{% else %}false{% endif %};
+      var URLS = {
+        main: '{{ request.scheme }}://{{ request.get_host }}',
+        login: {
+          google: '/auth/social/login/google-oauth2/'
+        }
+      };
+      var APP = {
+        name: '{{ site.name }}',
+        icon: '{% static "img/banner80.png" %}',
+        images: { {% for img in files.images %}
+          {{ img }}: '{% static img %}'{% if not forloop.last %}, {% endif %}{% endfor %}
+        }
+      };
+    </script>
+    {% for tpl in files.templates %}
+    <script type="text/x-template" id="tpl-{{ tpl.path }}">
+      {{ tpl.content | safe }}
+    </script>{% endfor %}
+    {% for js in files.js %}
+    <script src="{% static js %}"></script>{% endfor %}
+  </body>
+</html>

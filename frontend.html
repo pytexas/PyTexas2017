@@ -34,6 +34,7 @@
         display: none;
       }
     </style>
+    
     <link href="https://fonts.googleapis.com/css?family=Audiowide|Roboto+Slab" rel="stylesheet">
     {% for css in files.css %}
     <link rel="stylesheet" href="{% static css %}">{% endfor %}
@@ -45,17 +46,16 @@
       <img src="{% static "img/banner80.png" %}" alt="{{ site.name }}">
     </div>
     <div id="app">
-      <md-toolbar>
+      <md-toolbar class="topbar">
         <div>
           <router-link :to="{name: 'home'}">
-            <img src="{% static "img/banner80.png" %}">
+            <img src="{% static "img/icon.svg" %}" alt="PyTexas">
           </router-link>
           <h2>
             <router-link :to="{name: 'home'}">
-              <span>{{ site.name }}</span>
+              PyTexas 2017
             </router-link>
           </h2>
-          <nac-nav ref="nav"></nav-nav>
         </div>
       </md-toolbar>
       <md-progress v-if="loading" class="md-accent main" md-indeterminate></md-progress>
@@ -76,7 +76,7 @@
       };
       var APP = {
         name: '{{ site.name }}',
-        icon: '{% static "img/banner80.png" %}'
+        icon: '{% static "img/icon.svg" %}'
       };
     </script>
     {% for tpl in files.templates %}

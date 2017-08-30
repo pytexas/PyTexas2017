@@ -11,7 +11,7 @@ var build_tasks = ['build-js', 'build-css'];
 
 gulp.task('build-js', function () {
   return rollup({
-    entry: './static/nac/nac.js',
+    input: './frontend/app/pytx.js',
     plugins: [
       resolve({ jsnext: true }),
       commonjs(),
@@ -21,7 +21,7 @@ gulp.task('build-js', function () {
   }).then(function (bundle) {
     return bundle.write({
       format: 'iife',
-      dest: './static/dist/nac.js',
+      file: './frontend/2017-dist/pytx.js',
       globals: {
         "vue": 'Vue',
         "vue-router": 'VueRouter',
@@ -32,16 +32,16 @@ gulp.task('build-js', function () {
 });
 
 gulp.task('build-css', function () {
-  return gulp.src("static/nac/**/*.less")
+  return gulp.src("frontend/app/**/*.less")
     .pipe(plumber())
-    .pipe(less({paths: ['static/less']}))
-    .pipe(concat('nac.css'))
-    .pipe(gulp.dest("static/dist"));
+    .pipe(less({paths: ['frontend/less']}))
+    .pipe(concat('pytx.css'))
+    .pipe(gulp.dest("frontend/2017-dist"));
 });
 
 gulp.task('watch', build_tasks, function () {
-  gulp.watch("static/nac/**/*.js", ['build-js']);
-  gulp.watch("static/**/*.less", ['build-css']);
+  gulp.watch("frontend/app/**/*.js", ['build-js']);
+  gulp.watch("frontend/**/*.less", ['build-css']);
 });
 
 gulp.task('default', build_tasks);

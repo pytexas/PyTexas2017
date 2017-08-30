@@ -1,0 +1,42 @@
+@import "styles";
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background-color: lighten(@dividerColor, 22%) !important;
+  font-size: 1.2rem;
+}
+
+.topbar {
+  a {
+    color: @textPrimaryColor !important;
+  }
+  
+  img {
+    width: 42px;
+    margin-right: 10px;
+  }
+  
+  h2 {
+    margin: 0;
+  }
+  
+  > div {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.md-card {
+  max-width: 960px;
+  margin: 0 auto;
+  
+  .md-card-content {
+    font-size: 1.2rem;
+    line-height: normal;
+  }
+}

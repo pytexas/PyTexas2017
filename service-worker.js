@@ -1,25 +1,21 @@
+{% load static %}
 var RELEASE = '{{ release }}';
 var CACHE_NAME = 'release-{{ release }}';
+var CONF_HTTP = '{{ request.scheme }}://{{ request.get_host }}/{{ conf }}/';
 var CORE_FILES = [
-  "/",
-  {% for css in css_files %}"{% static css %}",
-  {% endfor %}{% for js in js_files %}"{% static js %}",
-  {% endfor %}{% for f in fonts %}"{% static f %}",
+  "/{{ conf }}/",
+  {% for css in files.css %}"{% static css %}",
+  {% endfor %}{% for js in files.js %}"{% static js %}",
+  {% endfor %}{% for f in files.fonts %}"{% static f %}",
+  {% endfor %}{% for f in files.images %}"{% static f %}",
+  {% endfor %}{% for f in files.md %}"{% static f %}",
   {% endfor %}
-  
-  "{% static "icons/android-chrome-192x192.png" %}",
-  "{% static "img/logo-fish.svg" %}"
-];
-
-var APP_FILES = [
-  "{% url "offline-data" release "kjv" %}"
 ];
 
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
-      console.log('Caching');
-      cache.addAll(APP_FILES);
+      console.log('Service Worker Caching');
       return cache.addAll(CORE_FILES);
     })
   );
@@ -40,50 +36,43 @@ self.addEventListener('activate', function(event) {
   );
 });
 
-var APP = null;
 
-self.addEventListener('fetch', function (event) {
-  if (event.request.method == "POST" && event.request.url.endsWith("/data-graph")) {
-    var ckey = event.request.headers.get('swcache');
-    if (ckey) {
-      var keys = ckey.split('/');
-      var url = `/data/${RELEASE}/${keys[0]}.json`;
-      event.respondWith(
-        caches.match(url).then(function(response) {
-          if (response) {
-            var responseInit = {
-              status: 200,
-              statusText: 'OK',
-              headers: {'Content-Type': 'application/json'}
-            };
-            
-            if (APP) {
-              console.log('Found Preloaded APP', keys[1], keys[2]);
-              var body = APP[keys[1]][keys[2]];
-              var mock = new Response(JSON.stringify(body), responseInit);
-              return mock;
-            }
-            
-            return response.json().then(function(json) {
-              console.log('Found Cache', keys[1], keys[2]);
-              APP = json;
-              var body = json[keys[1]][keys[2]];
-              var mock = new Response(JSON.stringify(body), responseInit);
-              return mock;
+function network_fetch (event) {
+  var fetchRequest = event.request.clone();
+  
+  return fetch(fetchRequest).then(function(response) {
+    console.log('Response from network:', event.request.url);
+    return response;
+  }).catch(function(error) {
+    console.error('Fetching failed:', error);
+    throw error;
+  });
+}
+
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        if (response) {
+          // console.log('Cached Response:', event.request.url);
+          return response;
+        }
+        
+        if (event.request.url.indexOf(CONF_HTTP) === 0) {
+          return caches.match("/{{ conf }}/")
+            .then(function(response) {
+              if (response) {
+                // console.log('Index Cached Response:', event.request.url);
+                return response;
+              }
+              
+              return network_fetch(event);
             });
-          }
-          
-          return fetch(event.request).then(function(response) {
-            console.log('Response from network is:', url);
-            return response;
-          }).catch(function(error) {
-            console.error('Fetching failed:', error);
-            throw error;
-          });
-        })
-      );
-    }
-  }
+        }
+        
+        return network_fetch(event);
+      })
+    );
 });
 
 self.addEventListener('message', function (event) {

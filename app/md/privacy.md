@@ -68,6 +68,6 @@ This policy was last modified on 2012/07/03
 
 ## Contacting Us
 
-If there are any questions regarding this privacy policy you may contact us by email.
+If there are any questions regarding this privacy policy you may contact us by email (conference(at)pytexas.org).
 
 This policy is powered by Free Privacy Policy and Rhino Support help desk software.

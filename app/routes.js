@@ -1,10 +1,12 @@
 import VueRouter from 'vue-router';
 
 import Home from './pages/home';
+import mdPage from './pages/md-page';
 
 const NotFound = {template: '#tpl-404'};
 
 export var Routes = [
+  {path: '/page/:slug', name: 'md-page', component: mdPage, props: true},
   {path: '/', name: 'home', component: Home},
   {path: '*', component: NotFound}
 ];
@@ -12,6 +14,7 @@ export var Routes = [
 export var scrolledTo = null;
 
 var router = new VueRouter({
+  base: '/2017',
   mode: 'history',
   routes: Routes,
   scrollBehavior: function (to, from, savedPosition) {

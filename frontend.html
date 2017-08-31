@@ -1,4 +1,4 @@
-<!doctype html>{% load static %}
+<!doctype html>{% load static conference %}
 <html lang="en">
   <head>
     <!-- Release: {{ release }} -->
@@ -62,7 +62,15 @@
         <router-view></router-view>
       </div>
       <footer>
-        
+        <router-link :to="{name: 'md-page', params: {slug: 'privacy'}}">
+          Privacy Policy
+        </router-link>
+         &nbsp;|&nbsp; 
+        <router-link :to="{name: 'md-page', params: {slug: 'code-of-conduct'}}">
+          Code of Conduct
+        </router-link>
+         &nbsp;|&nbsp; 
+        Release: {{ release }}
       </footer>
     </div>
     <script>
@@ -71,6 +79,10 @@
         main: '{{ request.scheme }}://{{ request.get_host }}',
         login: {
           google: '/auth/social/login/google-oauth2/'
+        },
+        md: {
+          {% for md in files.md %}'{{ md|json_attr }}': '{% static md %}'{% if not forloop.last %},{% endif %}
+          {% endfor %}
         }
       };
       var APP = {

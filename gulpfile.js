@@ -7,7 +7,7 @@ var buble = require('rollup-plugin-buble');
 var resolve = require('rollup-plugin-node-resolve');
 var commonjs = require('rollup-plugin-commonjs');
 
-var build_tasks = ['build-js', 'build-css'];
+var build_tasks = ['build-js', 'build-css', 'copy-md'];
 
 gulp.task('build-js', function () {
   return rollup({
@@ -39,7 +39,14 @@ gulp.task('build-css', function () {
     .pipe(gulp.dest("frontend/2017-dist"));
 });
 
+gulp.task('copy-md', function () {
+  return gulp.src("frontend/app/md/**/*.md")
+    .pipe(plumber())
+    .pipe(gulp.dest("frontend/2017-dist/md"));
+});
+
 gulp.task('watch', build_tasks, function () {
+  gulp.watch("frontend/app/md/**/*.md", ['copy-md']);
   gulp.watch("frontend/app/**/*.js", ['build-js']);
   gulp.watch("frontend/**/*.less", ['build-css']);
 });

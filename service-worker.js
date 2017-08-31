@@ -11,7 +11,7 @@ var CORE_FILES = [
   "{% static "img/logo-fish.svg" %}"
 ];
 
-var BIBLE_FILES = [
+var APP_FILES = [
   "{% url "offline-data" release "kjv" %}"
 ];
 
@@ -19,7 +19,7 @@ self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
       console.log('Caching');
-      cache.addAll(BIBLE_FILES);
+      cache.addAll(APP_FILES);
       return cache.addAll(CORE_FILES);
     })
   );
@@ -40,7 +40,7 @@ self.addEventListener('activate', function(event) {
   );
 });
 
-var BIBLE = null;
+var APP = null;
 
 self.addEventListener('fetch', function (event) {
   if (event.request.method == "POST" && event.request.url.endsWith("/data-graph")) {
@@ -57,16 +57,16 @@ self.addEventListener('fetch', function (event) {
               headers: {'Content-Type': 'application/json'}
             };
             
-            if (BIBLE) {
-              console.log('Found Preloaded Bible', keys[1], keys[2]);
-              var body = BIBLE[keys[1]][keys[2]];
+            if (APP) {
+              console.log('Found Preloaded APP', keys[1], keys[2]);
+              var body = APP[keys[1]][keys[2]];
               var mock = new Response(JSON.stringify(body), responseInit);
               return mock;
             }
             
             return response.json().then(function(json) {
               console.log('Found Cache', keys[1], keys[2]);
-              BIBLE = json;
+              APP = json;
               var body = json[keys[1]][keys[2]];
               var mock = new Response(JSON.stringify(body), responseInit);
               return mock;

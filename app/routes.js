@@ -6,7 +6,7 @@ import mdPage from './pages/md-page';
 const NotFound = {template: '#tpl-404'};
 
 export var Routes = [
-  {path: '/page/:slug', name: 'md-page', component: mdPage, props: true},
+  {path: '/page/:slug(.*)', name: 'md-page', component: mdPage, props: true},
   {path: '/', name: 'home', component: Home},
   {path: '*', component: NotFound}
 ];

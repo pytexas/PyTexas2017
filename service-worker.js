@@ -1,4 +1,4 @@
-{% load static %}
+{% load static conference %}
 var RELEASE = '{{ release }}';
 var CACHE_NAME = 'release-{{ release }}';
 var CONF_HTTP = '{{ request.scheme }}://{{ request.get_host }}/{{ conf }}/';
@@ -9,7 +9,7 @@ var CORE_FILES = [
   {% endfor %}{% for js in files.js %}"{% static js %}",
   {% endfor %}{% for f in files.fonts %}"{% static f %}",
   {% endfor %}{% for f in files.images %}"{% static f %}",
-  {% endfor %}{% for f in files.md %}"{% static f %}",
+  {% endfor %}{% for f in files.md %}"{% static f|dist:"md" %}",
   {% endfor %}
 ];
 

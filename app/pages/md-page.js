@@ -18,7 +18,7 @@ var mdPage = Vue.component('md-page', {
   watch: {'$route': 'init'},
   methods: {
     init() {
-      axios.get(URLS.md[this.slug])
+      axios.get(URLS.md[this.slug + '.md'])
         .then((response) => {
           var converter = new showdown.Converter();
           

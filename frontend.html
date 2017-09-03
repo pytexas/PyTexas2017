@@ -45,18 +45,7 @@
       <img src="{% static "img/banner80.png" %}" alt="{{ site.name }}">
     </div>
     <div id="app">
-      <md-toolbar class="topbar">
-        <div>
-          <router-link :to="{name: 'home'}">
-            <img src="{% static "img/icon.svg" %}" alt="PyTexas">
-          </router-link>
-          <h2>
-            <router-link :to="{name: 'home'}">
-              PyTexas 2017
-            </router-link>
-          </h2>
-        </div>
-      </md-toolbar>
+      <top-bar></top-bar>
       <md-progress v-if="loading" class="md-accent main" md-indeterminate></md-progress>
       <div v-if="update_needed" class="update">
         New version available:
@@ -66,14 +55,15 @@
         </md-button>
       </div>
       <div id="content">
+        <tab-nav></tab-nav>
         <router-view></router-view>
       </div>
       <footer>
-        <router-link :to="{name: 'md-page', params: {slug: 'privacy'}}">
+        <router-link to="/page/about/privacy">
           Privacy Policy
         </router-link>
          &nbsp;|&nbsp; 
-        <router-link :to="{name: 'md-page', params: {slug: 'code-of-conduct'}}">
+        <router-link to="/page/about/code-of-conduct">
           Code of Conduct
         </router-link>
          &nbsp;|&nbsp; 
@@ -88,7 +78,7 @@
           google: '/auth/social/login/google-oauth2/'
         },
         md: {
-          {% for md in files.md %}'{{ md|json_attr }}': '{% static md %}'{% if not forloop.last %},{% endif %}
+          {% for md in files.md %}'{{ md }}': '{% static md|dist:"md" %}'{% if not forloop.last %},{% endif %}
           {% endfor %}
         }
       };
@@ -97,9 +87,15 @@
         icon: '{% static "img/icon.svg" %}'
       };
       
+      var IMAGES = {
+        {% for img in files.images %}"{{ img }}": "{% static img %}"{% if not forloop.last %},{% endif %}
+        {% endfor %}
+      };
+      
       var REGISTRATION = null;
       var SW_RELEASE = null;
       var UPDATE_NEEDED = false;
+      var SKIP_SW = {% if skip_sw %}true{% else %}false{% endif %};
     </script>
     {% for tpl in files.templates %}
     <script type="text/x-template" id="tpl-{{ tpl.path }}">

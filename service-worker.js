@@ -13,6 +13,8 @@ var CORE_FILES = [
 ];
 
 self.addEventListener('install', function(event) {
+  self.skipWaiting();
+  
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
       console.log('Service Worker Caching');
@@ -22,6 +24,8 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('activate', function(event) {
+  event.waitUntil(clients.claim());
+  
   event.waitUntil(
     caches.keys().then(function(names) {
       return Promise.all(
@@ -75,7 +79,25 @@ self.addEventListener('fetch', function(event) {
     );
 });
 
+function clear_all_cache (event) {
+  event.waitUntil(
+    caches.keys().then(function(names) {
+      return Promise.all(
+        names.map(function(cname) {
+          console.log('Clearing Cache: ', cname);
+          return caches.delete(cname);
+        })
+      );
+    })
+  );
+}
+
 self.addEventListener('message', function (event) {
   console.log("SW Received Message: " + event.data);
-  event.ports[0].postMessage("ping-back");
+  if (event.data == 'release') {
+    event.ports[0].postMessage(RELEASE);
+  } else if (event.data == 'clear') {
+    clear_all_cache(event);
+    event.ports[0].postMessage('cleared');
+  }
 });

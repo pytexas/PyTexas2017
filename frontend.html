@@ -58,6 +58,13 @@
         </div>
       </md-toolbar>
       <md-progress v-if="loading" class="md-accent main" md-indeterminate></md-progress>
+      <div v-if="update_needed" class="update">
+        New version available:
+        <md-button class="md-raised" @click="do_update()">
+          <md-icon>refresh</md-icon>
+          Update
+        </md-button>
+      </div>
       <div id="content">
         <router-view></router-view>
       </div>
@@ -89,6 +96,10 @@
         name: '{{ site.name }}',
         icon: '{% static "img/icon.svg" %}'
       };
+      
+      var REGISTRATION = null;
+      var SW_RELEASE = null;
+      var UPDATE_NEEDED = false;
     </script>
     {% for tpl in files.templates %}
     <script type="text/x-template" id="tpl-{{ tpl.path }}">

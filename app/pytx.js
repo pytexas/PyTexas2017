@@ -67,7 +67,11 @@ function clear_all_cache () {
   }
 }
 
-const CHECK_RELEASE_INTERVAL = 5 * 60 * 1000;
+var CHECK_RELEASE_INTERVAL = 5 * 60 * 1000;
+if (DEBUG) {
+  CHECK_RELEASE_INTERVAL = 20 * 1000;
+}
+
 var intervalID = null;
 
 if ('serviceWorker' in navigator) {

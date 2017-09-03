@@ -2,6 +2,7 @@
 var RELEASE = '{{ release }}';
 var CACHE_NAME = 'release-{{ release }}';
 var CONF_HTTP = '{{ request.scheme }}://{{ request.get_host }}/{{ conf }}/';
+var HTTP = '{{ request.scheme }}://{{ request.get_host }}';
 var CORE_FILES = [
   "/{{ conf }}/",
   {% for css in files.css %}"{% static css %}",
@@ -13,30 +14,34 @@ var CORE_FILES = [
 ];
 
 self.addEventListener('install', function(event) {
-  self.skipWaiting();
-  
   event.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
-      console.log('Service Worker Caching');
-      return cache.addAll(CORE_FILES);
-    })
+    caches.open(CACHE_NAME)
+      .then(function(cache) {
+        console.log('Service Worker Caching');
+        return cache.addAll(CORE_FILES);
+      })
+      .then(function () {
+        return self.skipWaiting();
+      })
   );
 });
 
 self.addEventListener('activate', function(event) {
-  event.waitUntil(clients.claim());
-  
   event.waitUntil(
-    caches.keys().then(function(names) {
-      return Promise.all(
-        names.map(function(cname) {
-          if (cname != CACHE_NAME) {
-            console.log('Clearing Cache: ', cname);
-            return caches.delete(cname);
-          }
-        })
-      );
-    })
+    caches.keys()
+      .then(function(names) {
+        return Promise.all(
+          names.map(function(cname) {
+            if (cname != CACHE_NAME) {
+              console.log('Clearing Cache: ', cname);
+              return caches.delete(cname);
+            }
+          })
+        );
+      })
+      .then(function () {
+        return clients.claim();
+      })
   );
 });
 
@@ -84,8 +89,10 @@ function clear_all_cache (event) {
     caches.keys().then(function(names) {
       return Promise.all(
         names.map(function(cname) {
-          console.log('Clearing Cache: ', cname);
-          return caches.delete(cname);
+          if (cname == CACHE_NAME) {
+            console.log('Clearing Cache: ', cname);
+            return caches.delete(cname);
+          }
         })
       );
     })

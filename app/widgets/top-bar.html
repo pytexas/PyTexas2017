@@ -1,0 +1,41 @@
+<div>
+  <md-toolbar class="topbar">
+    <div>
+      <router-link :to="{name: 'home'}">
+        <img :src="'img/icon.svg' | image" alt="PyTexas">
+      </router-link>
+      <h2>
+        <router-link :to="{name: 'home'}">
+          PyTexas 2017
+        </router-link>
+      </h2>
+      <div>
+        <md-button class="md-icon-button" @click="toggleRightSidenav">
+          <md-icon>menu</md-icon>
+        </md-button>
+      </div>
+    </div>
+  </md-toolbar>
+  <md-sidenav class="md-right" ref="rightSidenav" @open="open('Right')" @close="close('Right')">
+    <md-toolbar>
+      <div class="md-toolbar-container">
+        <h3 class="md-title">Site Nav</h3>
+      </div>
+    </md-toolbar>
+    <md-list>
+      <md-list-item v-for="(link, index) in links" :key="index">
+        <div>
+          <md-button class="md-accent" @click="goto(link.url)">
+            {{ link.name }}
+          </md-button>
+          <md-divider></md-divider>
+        </div>
+      </md-list-item>
+      <md-list-item>
+        <div>
+          <md-button class="md-primary" @click="closeRightSidenav">Close Nav</md-button>
+        </div>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
+</div>

@@ -1,0 +1,43 @@
+@import "styles";
+
+.topbar {
+  a {
+    color: @textPrimaryColor !important;
+  }
+  
+  img {
+    width: 42px;
+    margin-right: 10px;
+  }
+  
+  h2 {
+    margin: 0;
+  }
+  
+  > div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    
+    h2 {
+      flex: 1;
+    }
+  }
+}
+
+.md-sidenav {
+  .md-list-item .md-list-item-container {
+    padding: 0;
+    
+    > div {
+      width: 100%;
+    }
+  }
+  
+  .md-button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin: 0;
+  }
+}

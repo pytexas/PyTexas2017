@@ -1,0 +1,7 @@
+<div class="tab-nav">
+  <div v-if="tabs">
+    <router-link tag="md-button" :class="tab|klass" v-for="(tab, index) in tabs" :to="tab.url" :key="index">
+      {{ tab.name }}
+    </router-link>
+  </div>
+</div>

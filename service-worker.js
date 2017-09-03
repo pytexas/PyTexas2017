@@ -84,27 +84,29 @@ self.addEventListener('fetch', function(event) {
     );
 });
 
-function clear_all_cache (event) {
-  event.waitUntil(
-    caches.keys().then(function(names) {
-      return Promise.all(
-        names.map(function(cname) {
-          if (cname == CACHE_NAME) {
-            console.log('Clearing Cache: ', cname);
-            return caches.delete(cname);
-          }
-        })
-      );
-    })
-  );
+function clear_all_cache (event, newest) {
+  if (newest != RELEASE) {
+    event.waitUntil(
+      caches.keys().then(function(names) {
+        return Promise.all(
+          names.map(function(cname) {
+            if (cname == CACHE_NAME) {
+              console.log('Clearing Cache: ', cname);
+              return caches.delete(cname);
+            }
+          })
+        );
+      })
+    );
+  }
 }
 
 self.addEventListener('message', function (event) {
-  console.log("SW Received Message: " + event.data);
-  if (event.data == 'release') {
+  console.log("SW Received Message: ", event.data);
+  if (event.data.task == 'release') {
     event.ports[0].postMessage(RELEASE);
-  } else if (event.data == 'clear') {
-    clear_all_cache(event);
+  } else if (event.data.task == 'clear') {
+    clear_all_cache(event, event.data.newest_release);
     event.ports[0].postMessage('cleared');
   }
 });

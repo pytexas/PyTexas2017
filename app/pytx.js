@@ -49,13 +49,13 @@ var app = new Vue({
       console.log('Doing Update');
       REGISTRATION.update()
         .then(function () {
-          clear_all_cache();
+          clear_all_cache(NEWEST_RELEASE);
         });
     }
   }
 });
 
-function clear_all_cache () {
+function clear_all_cache (NEWEST_RELEASE) {
   if (navigator.serviceWorker.controller && navigator.serviceWorker.controller.postMessage) {
     var msg_chan = new MessageChannel();
     msg_chan.port1.onmessage = function (event) {
@@ -63,7 +63,7 @@ function clear_all_cache () {
       location.reload();
     };
     
-    navigator.serviceWorker.controller.postMessage("clear", [msg_chan.port2]);
+    navigator.serviceWorker.controller.postMessage({task: 'clear', newest_release: NEWEST_RELEASE}, [msg_chan.port2]);
   }
 }
 
@@ -98,9 +98,11 @@ function get_sw_release () {
       SW_RELEASE = event.data;
     };
     
-    navigator.serviceWorker.controller.postMessage("release", [msg_chan.port2]);
+    navigator.serviceWorker.controller.postMessage({task: 'release'}, [msg_chan.port2]);
   }
 }
+
+var NEWEST_RELEASE = null;
 
 function check_release () {
   console.log("Checking Release", SW_RELEASE);
@@ -108,8 +110,10 @@ function check_release () {
     if (SW_RELEASE) {
       axios.get("/release?ts=" + Date.now())
         .then((response) => {
-          console.log(response.data.release, SW_RELEASE);
-          if (response.data.release != SW_RELEASE) {
+          NEWEST_RELEASE = response.data.release;
+          
+          console.log(NEWEST_RELEASE, SW_RELEASE);
+          if (NEWEST_RELEASE != SW_RELEASE) {
             console.log('UPDATE NEEDED');
             UPDATE_NEEDED = true;
             clearInterval(intervalID);

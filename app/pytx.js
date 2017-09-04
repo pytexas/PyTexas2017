@@ -76,9 +76,13 @@ function clear_all_cache (NEWEST_RELEASE) {
   }
 }
 
-var CHECK_RELEASE_INTERVAL = 5 * 60 * 1000;
+var CHECK_RELEASE_INTERVAL = 60 * 1000;
+var CHECK_DELTA = 5 * 60 * 1000;
+var LAST_CHECK = Date.now();
+
 if (DEBUG) {
-  CHECK_RELEASE_INTERVAL = 20 * 1000;
+  CHECK_RELEASE_INTERVAL = 5 * 1000;
+  CHECK_DELTA = 20 * 1000;
 }
 
 var intervalID = null;
@@ -118,7 +122,14 @@ function get_sw_release () {
 var NEWEST_RELEASE = null;
 
 function check_release () {
+  if (Date.now() - LAST_CHECK >= CHECK_DELTA) {
+    LAST_CHECK = Date.now();
+  } else {
+    return;
+  }
+  
   console.log("Checking Release", SW_RELEASE);
+  
   if (REGISTRATION) {
     if (SW_RELEASE) {
       axios.get("/release?ts=" + Date.now())

@@ -2,6 +2,11 @@ import Vue from 'vue';
 
 import {image} from '../filters';
 
+export var LINKS = [
+  {name: 'About', url: '/page/about/conference'},
+  {name: 'Community', url: '/page/community/meetups'}
+];
+
 var SideNav = Vue.component('side-nav', {
   template: '#tpl-widgets-side-nav',
   props: ['report_ref'],
@@ -20,9 +25,7 @@ var SideNav = Vue.component('side-nav', {
   },
   data() {
     return {
-      links: [
-        {name: 'About', url: '/page/about/conference'}
-      ]
+      links: LINKS
     };
   },
   methods: {

@@ -7,6 +7,13 @@ import SideNav from './widgets/side-nav';
 import TopBar from './widgets/top-bar';
 import TabNav from './widgets/tab-nav';
 
+if (!DEBUG) {
+  Raven
+    .config('https://48afdd6633574781814c36e6c0d2a69f@sentry.io/212458')
+    .addPlugin(Raven.Plugins.Vue, Vue)
+    .install();
+}
+
 Vue.use(VueRouter);
 Vue.use(VueMaterial);
 

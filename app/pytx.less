@@ -39,6 +39,23 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.md-button {
+  &.txicon {
+    display: flex;
+    align-items: center;
+    
+    .md-icon {
+      margin-right: 8px;
+    }
+  }
+  
+  &.md-accent {
+    path {
+      fill: @accentColor;
+    }
+  }
+}
+
 .update {
   text-align: center;
   display: flex;

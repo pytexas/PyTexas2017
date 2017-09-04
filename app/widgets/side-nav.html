@@ -8,10 +8,12 @@
     <md-list>
       <md-list-item v-for="(link, index) in links" :key="index">
         <div>
-          <md-button v-if="!link.external" class="md-accent" @click="goto(link.url)">
+          <md-button v-if="!link.external" class="md-accent txicon" @click="goto(link.url)">
+            <md-icon :md-src="link.icon"></md-icon>
             {{ link.name }}
           </md-button>
-          <md-button v-if="link.external" class="md-accent" @click="closeRightSidenav" :href="link.url" target="_blank">
+          <md-button v-if="link.external" class="md-accent txicon" @click="closeRightSidenav" :href="link.url" target="_blank">
+            <md-icon :md-src="link.icon"></md-icon>
             {{ link.name }}
           </md-button>
           <md-divider></md-divider>

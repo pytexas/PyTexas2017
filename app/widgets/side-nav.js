@@ -3,10 +3,27 @@ import Vue from 'vue';
 import {image} from '../filters';
 
 export var LINKS = [
-  {name: 'Chat Room', url: 'https://gitter.im/pytexas/PyTexas', external: true},
-  {name: 'About', url: '/page/about/conference'},
-  {name: 'Venue', url: '/page/venue/map'},
-  {name: 'Community', url: '/page/community/meetups'},
+  {
+    name: 'Chat Room',
+    url: 'https://gitter.im/pytexas/PyTexas',
+    external: true,
+    icon: image('img/icons/chat.svg')
+  },
+  {
+    name: 'About',
+    url: '/page/about/conference',
+    icon: image('img/icons/about.svg')
+  },
+  {
+    name: 'Venue',
+    url: '/page/venue/map',
+    icon: image('img/icons/venue.svg')
+  },
+  {
+    name: 'Community',
+    url: '/page/community/meetups',
+    icon: image('img/icons/community.svg')
+  },
 ];
 
 var SideNav = Vue.component('side-nav', {

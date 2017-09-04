@@ -1,5 +1,6 @@
 import Vue from 'vue';
 
+import {image} from '../filters';
 import ErrorDialog from '../dialogs/error';
 
 var mdPage = Vue.component('md-page', {
@@ -11,6 +12,13 @@ var mdPage = Vue.component('md-page', {
       html: '',
       current_dialog: null
     };
+  },
+  computed: {
+    icon() {
+      var url_parts = this.$route.path.split('/');
+      
+      return image(`img/icons/${url_parts[2]}.svg`);
+    }
   },
   created() {
     this.init();

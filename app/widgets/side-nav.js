@@ -3,6 +3,7 @@ import Vue from 'vue';
 import {image} from '../filters';
 
 export var LINKS = [
+  {name: 'Chat Room', url: 'https://gitter.im/pytexas/PyTexas', external: true},
   {name: 'About', url: '/page/about/conference'},
   {name: 'Community', url: '/page/community/meetups'}
 ];

@@ -39,6 +39,9 @@ var SideNav = Vue.component('side-nav', {
       //console.log('Closed: ' + ref);
     },
     goto(url) {
+      var el = document.querySelector('#app');
+      el.scrollTop = 0;
+      
       this.closeRightSidenav();
       this.$router.push(url);
     }

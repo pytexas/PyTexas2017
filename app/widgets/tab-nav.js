@@ -16,6 +16,11 @@ export var COMMUNITY_TABS = [
   {name: 'Employers', url: '/page/community/employers'}
 ];
 
+export var VENUE_TABS = [
+  {name: 'Map', url: '/page/venue/map'},
+  {name: 'Hotels', url: '/page/venue/hotels'}
+];
+
 var TabNav = Vue.component('tab-nav', {
   template: '#tpl-widgets-tab-nav',
   watch: {'$route': 'init'},
@@ -30,7 +35,7 @@ var TabNav = Vue.component('tab-nav', {
   filters: {
     klass(tab) {
       if (tab.active) {
-        return 'md-dense md-primary'
+        return 'md-dense md-primary';
       }
       
       return 'md-dense';
@@ -41,9 +46,11 @@ var TabNav = Vue.component('tab-nav', {
       this.tabs = null;
       
       if (this.$route.path.indexOf('/page/about/') === 0) {
-        this.tabs = ABOUT_TABS;
+        this.tabs = [...ABOUT_TABS];
       } else if (this.$route.path.indexOf('/page/community/') === 0) {
-        this.tabs = COMMUNITY_TABS;
+        this.tabs = [...COMMUNITY_TABS];
+      } else if (this.$route.path.indexOf('/page/venue/') === 0) {
+        this.tabs = [...VENUE_TABS];
       }
       
       if (this.tabs) {

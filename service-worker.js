@@ -1,8 +1,8 @@
 {% load static conference %}
 var RELEASE = '{{ release }}';
 var CACHE_NAME = 'release-{{ release }}';
-var CONF_HTTP = '{{ request.scheme }}://{{ request.get_host }}/{{ conf }}/';
-var HTTP = '{{ request.scheme }}://{{ request.get_host }}';
+var CONF_HTTP = '{{ base_url }}/{{ conf }}/';
+var HTTP = '{{ base_url }}';
 var CORE_FILES = [
   "/{{ conf }}/",
   {% for css in files.css %}"{% static css %}",
@@ -71,7 +71,7 @@ self.addEventListener('fetch', function(event) {
           return caches.match("/{{ conf }}/")
             .then(function(response) {
               if (response) {
-                // console.log('Index Cached Response:', event.request.url);
+                console.log('Index Cached Response:', event.request.url);
                 return response;
               }
               

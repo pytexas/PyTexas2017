@@ -35,11 +35,13 @@ var TabNav = Vue.component('tab-nav', {
         ];
       }
       
-      this.tabs.forEach((tab) => {
-        if (tab.url == this.$route.path) {
-          tab.active = true;
-        }
-      });
+      if (this.tabs) {
+        this.tabs.forEach((tab) => {
+          if (tab.url == this.$route.path) {
+            tab.active = true;
+          }
+        });
+      }
     }
   }
 });

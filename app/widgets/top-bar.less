@@ -1,6 +1,16 @@
 @import "styles";
 
-.topbar {
+.topbar-wrapper {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.md-toolbar.topbar {
   a {
     color: @textPrimaryColor !important;
   }
@@ -22,22 +32,5 @@
     h2 {
       flex: 1;
     }
-  }
-}
-
-.md-sidenav {
-  .md-list-item .md-list-item-container {
-    padding: 0;
-    
-    > div {
-      width: 100%;
-    }
-  }
-  
-  .md-button {
-    display: block;
-    width: 100%;
-    text-align: left;
-    margin: 0;
   }
 }

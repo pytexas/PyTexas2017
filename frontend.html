@@ -45,7 +45,8 @@
       <img src="{% static "img/banner80.png" %}" alt="{{ site.name }}">
     </div>
     <div id="app">
-      <top-bar></top-bar>
+      <side-nav :report_ref="report_ref"></side-nav>
+      <top-bar :toggle="toggle"></top-bar>
       <md-progress v-if="loading" class="md-accent main" md-indeterminate></md-progress>
       <div v-if="update_needed" class="update">
         New version available:

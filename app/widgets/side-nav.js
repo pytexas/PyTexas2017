@@ -24,6 +24,12 @@ export var LINKS = [
     url: '/page/community/meetups',
     icon: image('img/icons/community.svg')
   },
+  {
+    name: 'Blog',
+    url: 'https://medium.com/pytexas',
+    external: true,
+    icon: image('img/icons/blog.svg')
+  }
 ];
 
 var SideNav = Vue.component('side-nav', {

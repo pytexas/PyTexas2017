@@ -10,6 +10,11 @@ export var LINKS = [
     icon: image('img/icons/chat.svg')
   },
   {
+    name: 'Become A Sponsor',
+    url: '/page/sponsors/prospectus',
+    icon: image('img/icons/sponsors.svg')
+  },
+  {
     name: 'About',
     url: '/page/about/conference',
     icon: image('img/icons/about.svg')

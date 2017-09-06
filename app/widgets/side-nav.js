@@ -1,55 +1,55 @@
-import Vue from 'vue';
+import Vue from "vue";
 
-import {image} from '../filters';
+import { image } from "../filters";
 
 export var LINKS = [
   {
-    name: 'Chat Room',
-    url: 'https://gitter.im/pytexas/PyTexas',
+    name: "Chat Room",
+    url: "https://gitter.im/pytexas/PyTexas",
     external: true,
-    icon: image('img/icons/chat.svg')
+    icon: image("img/icons/chat.svg")
   },
   {
-    name: 'Become A Sponsor',
-    url: '/page/sponsors/prospectus',
-    icon: image('img/icons/sponsors.svg')
+    name: "Become A Sponsor",
+    url: "/page/sponsors/prospectus",
+    icon: image("img/icons/sponsors.svg")
   },
   {
-    name: 'About',
-    url: '/page/about/conference',
-    icon: image('img/icons/about.svg')
+    name: "About",
+    url: "/page/about/conference",
+    icon: image("img/icons/about.svg")
   },
   {
-    name: 'Venue',
-    url: '/page/venue/map',
-    icon: image('img/icons/venue.svg')
+    name: "Venue",
+    url: "/page/venue/map",
+    icon: image("img/icons/venue.svg")
   },
   {
-    name: 'Community',
-    url: '/page/community/meetups',
-    icon: image('img/icons/community.svg')
+    name: "Community",
+    url: "/page/community/meetups",
+    icon: image("img/icons/community.svg")
   },
   {
-    name: 'Blog',
-    url: 'https://medium.com/pytexas',
+    name: "Blog",
+    url: "https://medium.com/pytexas",
     external: true,
-    icon: image('img/icons/blog.svg')
+    icon: image("img/icons/blog.svg")
   }
 ];
 
-var SideNav = Vue.component('side-nav', {
-  template: '#tpl-widgets-side-nav',
-  props: ['report_ref'],
-  filters: {image: image},
+var SideNav = Vue.component("side-nav", {
+  template: "#tpl-widgets-side-nav",
+  props: ["report_ref"],
+  filters: { image: image },
   created() {
     this.report_ref(this);
-    
+
     this.$nextTick(() => {
       var self = this.$refs.rightSidenav;
-      self.open = function () {
+      self.open = function() {
         self.mdVisible = true;
         //self.$el.focus();
-        self.$emit('open');
+        self.$emit("open");
       };
     });
   },
@@ -72,9 +72,9 @@ var SideNav = Vue.component('side-nav', {
       //console.log('Closed: ' + ref);
     },
     goto(url) {
-      var el = document.querySelector('#app');
+      var el = document.querySelector("#app");
       el.scrollTop = 0;
-      
+
       this.closeRightSidenav();
       this.$router.push(url);
     }

@@ -1,3 +1,3 @@
-export function image (path) {
+export function image(path) {
   return IMAGES[path];
 }

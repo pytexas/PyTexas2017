@@ -1,15 +1,15 @@
-function message_dialog (message, callback, opts) {
+function message_dialog(message, callback, opts) {
   var dialog = {
-    template: '#tpl-dialogs-message',
+    template: "#tpl-dialogs-message",
     data() {
       opts = opts || {};
-      
+
       return {
         message: message,
-        title: opts.title || 'Message',
-        icon: opts.icon || 'warning',
-        ref: opts.ref || 'msgdialog',
-        title_class: opts.title_class || 'msg'
+        title: opts.title || "Message",
+        icon: opts.icon || "warning",
+        ref: opts.ref || "msgdialog",
+        title_class: opts.title_class || "msg"
       };
     },
     mounted() {
@@ -28,7 +28,7 @@ function message_dialog (message, callback, opts) {
       }
     }
   };
-  
+
   return dialog;
 }
 

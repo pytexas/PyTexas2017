@@ -1,3 +1,4 @@
+@import "media";
 @import "styles";
 
 .leftnav-wrapper {
@@ -5,6 +6,10 @@
 
   div.md-list-item-container {
     padding: 0;
+  }
+
+  @media @for-phone {
+    display: none
   }
 
   .md-list-item .md-list-item-container .md-icon,

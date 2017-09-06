@@ -44,8 +44,16 @@
       #app {
         display: none;
       }
-      
-      
+
+      #content {
+        display: flex;
+      }
+
+      #content::after{
+        content: '';
+        flex: 1;
+      }
+
       #content > div > .md-card, .md-card.iconbg {
         background-position: top center;
         background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url({% static "img/icons/background.png" %});
@@ -74,7 +82,7 @@
         </md-button>
       </div>
       <div id="content">
-        <tab-nav></tab-nav>
+        <left-nav></left-nav>
         <router-view></router-view>
       </div>
       <footer>

@@ -4,6 +4,7 @@ import VueMaterial from "vue-material";
 
 import router from "./routes";
 import SideNav from "./widgets/side-nav";
+import LeftNav from "./widgets/left-nav";
 import TopBar from "./widgets/top-bar";
 import TabNav from "./widgets/tab-nav";
 

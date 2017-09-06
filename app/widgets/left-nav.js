@@ -10,29 +10,6 @@ var LeftNav = Vue.component("left-nav", {
     return {
       links: NAV_LINKS
     };
-  },
-  methods: {
-    /*
-    toggleRightSidenav() {
-      this.$refs.rightSidenav.toggle();
-    },
-    closeRightSidenav() {
-      this.$refs.rightSidenav.close();
-    },
-    open(ref) {
-      //console.log("Opened: " + ref);
-    },
-    close(ref) {
-      //console.log("Closed: " + ref);
-    },
-    */
-    goto(url) {
-      var el = document.querySelector("#app");
-      el.scrollTop = 0;
-
-      this.closeRightSidenav();
-      this.$router.push(url);
-    }
   }
 });
 

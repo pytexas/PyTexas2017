@@ -20,14 +20,19 @@ body {
   height: 100vh;
 }
 
-.main-panel {
-  padding-left: 95px;
-  padding-right: 10px;
+#content {
+  display: flex;
+}
 
-  @media @for-phone {
-    padding-left: 0;
-    padding-right: 0;
-  }
+#content::after {
+  content: "";
+  flex: 1;
+  min-width: @leftNavWidth;
+}
+
+.main-panel {
+  flex: 1;
+  flex-grow: 100;
 }
 
 h1,

@@ -2,11 +2,9 @@
 @import "styles";
 
 .leftnav-wrapper {
-  position: fixed;
-  margin-top: -7px;
-  margin-left: 5px;
-  width: 90px;
-  height: ~"calc(100vh - 68px)";
+  flex: 1;
+  padding: 5px;
+  min-width: @leftNavWidth;
 
   .md-list-item-container {
     padding: 0;
@@ -19,9 +17,11 @@
 
   .md-list.md-theme-default {
     display: flex;
-    height: 100%;
+    position: fixed;
+    height: ~"calc(100vh - 68px)";
     max-height: 440px;
     background-color: transparent;
+    padding: 0;
 
     .md-list-item {
       flex: 1;

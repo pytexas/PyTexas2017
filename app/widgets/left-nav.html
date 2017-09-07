@@ -1,0 +1,14 @@
+<div class="leftnav-wrapper">
+  <md-list>
+    <md-list-item v-for="(link, index) in links" :key="index">
+      <md-button v-if="!link.external" class="md-accent txicon" @click="goto(link.url)">
+        <md-icon :md-src="link.icon"></md-icon>
+        <div>{{ link.name }}</div>
+      </md-button>
+      <md-button v-if="link.external" class="md-accent txicon" target="_blank" :href="link.url">
+        <md-icon :md-src="link.icon"></md-icon>
+        <div>{{ link.name }}</div>
+      </md-button>
+    </md-list-item>
+  </md-list>
+</div>

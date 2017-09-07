@@ -1,41 +1,7 @@
 import Vue from "vue";
 
 import { image } from "../filters";
-
-export var LINKS = [
-  {
-    name: "Chat Room",
-    url: "https://gitter.im/pytexas/PyTexas",
-    external: true,
-    icon: image("img/icons/chat.svg")
-  },
-  {
-    name: "Become A Sponsor",
-    url: "/page/sponsors/prospectus",
-    icon: image("img/icons/sponsors.svg")
-  },
-  {
-    name: "About",
-    url: "/page/about/conference",
-    icon: image("img/icons/about.svg")
-  },
-  {
-    name: "Venue",
-    url: "/page/venue/map",
-    icon: image("img/icons/venue.svg")
-  },
-  {
-    name: "Community",
-    url: "/page/community/meetups",
-    icon: image("img/icons/community.svg")
-  },
-  {
-    name: "Blog",
-    url: "https://medium.com/pytexas",
-    external: true,
-    icon: image("img/icons/blog.svg")
-  }
-];
+import { NAV_LINKS } from "../data";
 
 var SideNav = Vue.component("side-nav", {
   template: "#tpl-widgets-side-nav",
@@ -55,7 +21,7 @@ var SideNav = Vue.component("side-nav", {
   },
   data() {
     return {
-      links: LINKS
+      links: NAV_LINKS
     };
   },
   methods: {

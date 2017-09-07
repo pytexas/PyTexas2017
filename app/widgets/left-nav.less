@@ -2,46 +2,69 @@
 @import "styles";
 
 .leftnav-wrapper {
-  flex: 1;
-
-  div.md-list-item-container {
+  position: fixed;
+  margin-top: -7px;
+  margin-left: 5px;
+  width: 90px;
+  height: ~'calc(100vh - 68px)';
+  
+  .md-list-item-container {
     padding: 0;
+    margin: 0;
   }
-
+  
   @media @for-phone {
     display: none
   }
-
-  .md-list-item .md-list-item-container .md-icon,
-  .md-button.txicon .md-icon {
-    margin: 0;
-  }
-
-  .md-button {
-    padding: 1em;
+  
+  .md-list.md-theme-default {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    height: 100%;
+    max-height: 440px;
+    background-color: transparent;
+    
+    .md-list-item {
+      flex: 1;
+      
+      .md-icon:first-of-type + * {
+        flex: none;
+      }
+      
+      .router-link-active.md-list-item-container {
+        color: @accentColor;
+      }
+      
+      .md-button.txicon .md-icon {
+        margin: 0;
+      }
+    }
+    
+    .md-list-item-container {
+      height: 100%;
+      
+      & > .md-icon:first-child {
+        margin: 0;
+      }
+    }
+  }
+  
+  .md-button {
     width: 100%;
-    margin: 0;
+    height: 100%;
+    margin: 3px 0;
+    padding: 0;
     color: @accentColor;
+    font-size: 0.8rem;
+    text-transform: none;
+    min-height: 0;
+    line-height: normal;
+    flex-direction: column;
+    justify-content: center;
   }
-
-  .md-theme-default.md-list
-    .md-list-item
-    .router-link-active.md-list-item-container {
-    color: @accentColor;
-  }
-
+  
   .md-icon {
-    flex: 1;
     path {
       fill: @accentColor;
     }
-  }
-
-  .md-list.md-theme-default {
-    background-color: transparent;
   }
 }

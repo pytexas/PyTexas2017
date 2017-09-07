@@ -6,7 +6,7 @@ import router from "./routes";
 import SideNav from "./widgets/side-nav";
 import LeftNav from "./widgets/left-nav";
 import TopBar from "./widgets/top-bar";
-import TabNav from "./widgets/tab-nav";
+import SubNav from "./widgets/sub-nav";
 
 if (!DEBUG) {
   Raven.config("https://48afdd6633574781814c36e6c0d2a69f@sentry.io/212458")

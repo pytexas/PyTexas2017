@@ -74,7 +74,10 @@
       </div>
       <div id="content">
         <left-nav></left-nav>
-        <router-view></router-view>
+        <div class="main-panel">
+          <sub-nav></sub-nav>
+          <router-view></router-view>
+        </div>
       </div>
       <footer>
         <router-link to="/page/about/privacy">

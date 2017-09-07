@@ -25,8 +25,8 @@ export var VENUE_TABS = [
   { name: "Hotels", url: "/page/venue/hotels" }
 ];
 
-var TabNav = Vue.component("tab-nav", {
-  template: "#tpl-widgets-tab-nav",
+var SubNav = Vue.component("sub-nav", {
+  template: "#tpl-widgets-sub-nav",
   watch: { $route: "init" },
   data() {
     return {
@@ -70,4 +70,4 @@ var TabNav = Vue.component("tab-nav", {
   }
 });
 
-export default TabNav;
+export default SubNav;

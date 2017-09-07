@@ -20,14 +20,15 @@ body {
   height: 100vh;
 }
 
+#content {
+  display: flex;
+}
+
 .main-panel {
-  padding-left: 95px;
-  padding-right: 10px;
-  
-  @media @for-phone {
-    padding-left: 0;
-    padding-right: 0;
-  }
+  flex: 1;
+  flex-grow: 100;
+  padding-right: 100px;
+  min-width: @desktopBreak;
 }
 
 h1,
@@ -42,7 +43,7 @@ h6 {
 .md-card {
   max-width: 865px;
   margin: 0 auto;
-  
+
   @media @for-phone {
     margin: 0;
     width: 100vw;

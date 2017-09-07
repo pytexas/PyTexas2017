@@ -24,15 +24,11 @@ body {
   display: flex;
 }
 
-#content::after {
-  content: "";
-  flex: 1;
-  min-width: @leftNavWidth;
-}
-
 .main-panel {
   flex: 1;
   flex-grow: 100;
+  padding-right: 100px;
+  min-width: @desktopBreak;
 }
 
 h1,

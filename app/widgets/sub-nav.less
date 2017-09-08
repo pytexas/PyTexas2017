@@ -1,0 +1,16 @@
+@import "media";
+
+.tab-nav {
+  max-width: 865px;
+  margin: 0 auto;
+
+  > div {
+    @media @for-desktop {
+      margin-top: 10px;
+    }
+  }
+
+  .md-tabs-content {
+    display: none;
+  }
+}

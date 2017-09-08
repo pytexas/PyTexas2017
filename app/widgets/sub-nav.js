@@ -46,6 +46,16 @@ var SubNav = Vue.component("sub-nav", {
     }
   },
   methods: {
+    onChange(index) {
+      var tab = this.tabs[index];
+      if (tab.external) {
+        location.href = tab.url;
+      } else {
+        var el = document.querySelector("#app");
+        el.scrollTop = 0;
+        this.$router.push(this.tabs[index].url);
+      }
+    },
     init() {
       this.tabs = null;
 

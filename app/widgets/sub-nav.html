@@ -1,12 +1,7 @@
 <div class="tab-nav">
   <div v-if="tabs">
-    <span v-for="(tab, index) in tabs">
-      <router-link v-if="!tab.external" tag="md-button" :class="tab|klass" :to="tab.url" :key="index">
-        {{ tab.name }}
-      </router-link>
-      <md-button v-if="tab.external" class="md-dense" :href="tab.url" target="_blank">
-        {{ tab.name }}
-      </md-button>
-    </span>
+    <md-tabs @change="onChange">
+      <md-tab v-for="(tab, index) in tabs" :md-label="tab.name" :md-active="tab.active" :key="index"/>
+    </md-tabs>
   </div>
 </div>

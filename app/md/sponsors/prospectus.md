@@ -65,7 +65,32 @@ We offer several standard packages. However, if none of these seem to fit,
 please feel free to contact the Sponsor Chair (above). We want to help you make the
 most of your investment in the Python community.
 
-*More Info to Come Soon*
+### Standard Packages
+
+- Bronze $200
+    - Available for individuals and startups of up to 10 employees
+    - Name and link included on PyTexas website
+    - 1 free ticket to PyTexas
+- Silver $750
+    - Name, link, and logo included on the PyTexas website
+    - Promotional items placed in the PyTexas swag bag
+    - Company name and link included in the PyTexas press release
+    - 2 free tickets to PyTexas
+- Gold $1000
+    - All the benefits of Silver-level sponsorship
+    - Select a table/booth space from the remaining available spots (first paid, first served)
+    - 1 additional free ticket to PyTexas (3 total)
+- Platinum $1,250
+    - Limit: 5
+    - All the benefits of Gold-level sponsorship
+    - Company logo on back of PyTexas t-shirt (size & placement subject to artistic license of PyTexas organizers and may be affected by the number of other sponsors at this level)
+    - Company banner placed in the large conference room
+    - If you are interested in this level, please [contact the Sponsor Chair](#contact) before purchasing. Once the number of Platinum sponsors has been finalized, we can define the size and placement of t-shirt logos.
+    - 1 additional free ticket to PyTexas (4 total)
+- Diamond $2,500
+    - Limit: 2
+    - All the benefits of Platinum-level sponsorship
+    - Premier brand placement for entire conference
 
 ### Have an Idea?
 

@@ -17,4 +17,4 @@ Tickets entitle you to access to the conference and meals during the conference.
 | Individual Regular Rate | $85 | Nov 12th |
 | Corporate Regular Rate | $150 | Nov 12th |
 | Student | $25 | Nov 12th |
-| Kid (12 and under) | $25 | Nov 12th |
+| Kid (12 and under) | free | Nov 12th |

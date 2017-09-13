@@ -2,10 +2,9 @@ import { image } from "./filters";
 
 export var NAV_LINKS = [
   {
-    name: "Chat Room",
-    url: "https://gitter.im/pytexas/PyTexas",
-    external: true,
-    icon: image("img/icons/chat.svg")
+    name: "Speaking",
+    url: "/page/talks/speaking",
+    icon: image("img/icons/talks.svg")
   },
   {
     name: "Sponsor",

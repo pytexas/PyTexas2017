@@ -14,7 +14,7 @@ export var NAV_LINKS = [
   },
   {
     name: "About",
-    url: "/page/about/conference",
+    url: "/page/about/registration",
     icon: image("img/icons/about.svg")
   },
   {

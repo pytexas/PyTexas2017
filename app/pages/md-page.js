@@ -29,7 +29,7 @@ var mdPage = Vue.component("md-page", {
       axios
         .get(URLS.md[this.slug + ".md"])
         .then(response => {
-          var converter = new showdown.Converter();
+          var converter = new showdown.Converter({tables: true});
 
           var text = response.data;
           this.title = text.match(/^# (.*)\n/)[1];

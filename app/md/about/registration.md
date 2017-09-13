@@ -8,6 +8,15 @@ Tickets entitle you to access to the conference and meals during the conference.
   </a>
 </strong>
 
+## Dates
+
+- Saturday, November 18th, 2017
+- Sunday, November 19th, 2017
+
+## Venue
+
+[Galvanize Austin](https://www.galvanize.com/austin/campus) on [119 Nueces St](https://goo.gl/maps/gkkQaKKugPs)
+
 ## Prices
 
 | Ticket Type | Price | Sales Ends On |

@@ -49,7 +49,7 @@ var SubNav = Vue.component("sub-nav", {
     onChange(index) {
       var tab = this.tabs[index];
       if (tab.external) {
-        location.href = tab.url;
+        window.open(tab.url);
       } else {
         var el = document.querySelector("#app");
         el.scrollTop = 0;

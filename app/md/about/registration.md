@@ -42,8 +42,8 @@ type for you. Employees of non-profits can also opt to register at the
 individual rate.
 
 ### Student
-Students of academic institutions are allowed to purchase tickets at a
-discounted rate. Please be prepared to provide your student ID at registration.
+Students are allowed to purchase tickets at a discounted rate. Please be
+prepared to provide your student ID at registration.
 
 ## Early Bird Rate
 Only a limited number of individual rate tickets are available at this rate.

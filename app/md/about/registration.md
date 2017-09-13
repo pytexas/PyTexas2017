@@ -27,3 +27,28 @@ Tickets entitle you to access to the conference and meals during the conference.
 | Corporate Regular Rate | $150 | Nov 12th |
 | Student | $25 | Nov 12th |
 | Kid (12 and under) | free | Nov 12th |
+
+## Which Ticket Should I Buy?
+
+### Corporate
+
+If your company is paying for you to attend, please register at the corporate
+rate. This will help keep the costs down for everyone else, especially students
+and those in need of financial assistance.
+
+### Individual
+If you’re paying for the conference yourself, this is the right registration
+type for you. Employees of non-profits can also opt to register at the
+individual rate.
+
+### Student
+Students of academic institutions are allowed to purchase tickets at a
+discounted rate. Please be prepared to provide your student ID at registration.
+
+## Early Bird Rate
+Only a limited number of individual rate tickets are available at this rate.
+Once they’re sold out, no more will be made available.
+
+## What’s Included?
+Along with your conference registration, attendees will receive breakfast,
+lunch, and break refreshments.

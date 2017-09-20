@@ -105,10 +105,11 @@ PyTexas also offers several exclusive sponsor benefits on a first-come, first-se
     - Each attendee’s badge will be affixed with a ribbon with a design of your
     choice (subject to approval by Sponsor Chair)
 - Coffee Sponsor ($500)
+    - Two slots available
     - Sponsor one day of coffee
     - Company logo on coffee table for the day
 - Exclusive party slot ($500)
-    - Saturday and Sunday slots currently available
+    - Friday Kickoff Party and Saturday Party slots currently available
     - Promote your party on the day of the party
     - Official promotion via website, schedule, and announcements
 

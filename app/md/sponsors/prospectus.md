@@ -74,7 +74,7 @@ most of your investment in the Python community.
     - 1 free ticket to PyTexas
 - Silver $750
     - Name, link, and logo included on the PyTexas website
-    - Promotional items placed in the PyTexas swag table
+    - Promotional items placed on the PyTexas swag table
     - Company name and link included in the PyTexas twitter feed and social platforms
     - 1 free tickets to PyTexas
 - Gold $1200
@@ -89,25 +89,25 @@ most of your investment in the Python community.
     - 1 additional free ticket to PyTexas (3 total)
 - Diamond $2,500
     - Limit: 2
-    - All the benefits of Platinum-level sponsorship
-    - Premier brand placement for entire conference
-    - Branding of one room
-    - Company logo on PyTexas t-shirt (Size & placement subject to artistic
-      license of PyTexas organizers.)
+    - All the benefits of Platinum sponsorship
+    - Please contact the Sponsor Chair for extra benefits in this tier.
 
 ### Exclusive Benefits
 
 PyTexas also offers several exclusive sponsor benefits on a first-come, first-served basis:
 
-- Lanyard
+- Lanyard ($500)
     - One slot available
     - Sponsor will provide printed branded lanyards to PyTexas
     (Need at least two weeks prior to event)
-- Lanyard targeted
-    - One slot available\=
+- Lanyard targeted ($500)
+    - One slot available
     - Each attendee’s badge will be affixed with a ribbon with a design of your
     choice (subject to approval by Sponsor Chair)
-- Exclusive party slot ($1000)
+- Coffee Sponsor ($500)
+    - Sponsor one day of coffee
+    - Company logo on coffee table for the day
+- Exclusive party slot ($500)
     - Saturday and Sunday slots currently available
     - Promote your party on the day of the party
     - Official promotion via website, schedule, and announcements

@@ -20,6 +20,7 @@ To submit your additions and edits to this page, fork the [PyTexas  Repository](
 
 - [Decisio Health, Inc](http://decisiohealth.com)
 - NASA
+- [NRG Energy](http://www.nrg.com/)
 - [Rice University](http://webservices.rice.edu/)
 
 ## San Antonio

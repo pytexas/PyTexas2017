@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "gulp",
     "prettier": "prettier --write 'frontend/app/**/*.js' && prettier --write 'frontend/**/*.less'"
   },
   "author": "",

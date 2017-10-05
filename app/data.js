@@ -1,11 +1,11 @@
 import { image } from "./filters";
 
 export var NAV_LINKS = [
-  {
-    name: "Speaking",
-    url: "/page/talks/speaking",
-    icon: image("img/icons/talks.svg")
-  },
+  // {
+  //   name: "Speaking",
+  //   url: "/page/talks/speaking",
+  //   icon: image("img/icons/talks.svg")
+  // },
   {
     name: "Sponsor",
     url: "/page/sponsors/prospectus",

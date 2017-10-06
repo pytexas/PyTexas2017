@@ -30,6 +30,14 @@
           Sponsor Prospectus
         </router-link>
       </p>
+      <md-divider></md-divider>
+      <h3>Our Sponsors</h3>
+      <div class="level" v-for="level in sponsors">
+        <h4>{{ level.name }}</h4>
+        <a v-for="s in level.sponsors" :href="s.url" target="_blank">
+          <img :src="resize(s.logoUrl, 150, 150)" :alt="s.name">
+        </a>
+      </div>
     </md-card-content>
   </md-card>
 </div>

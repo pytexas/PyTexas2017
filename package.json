@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prettier": "prettier --write 'frontend/app/**/*.js' && prettier --write 'frontend/**/*.less'"
+    "prettier": "prettier --write 'app/**/*.js' && prettier --write '**/*.less'"
   },
   "author": "",
   "license": "MIT",
@@ -28,6 +28,6 @@
     "vue-router": "^2.7.0"
   },
   "devDependencies": {
-    "prettier": "^1.6.1"
+    "prettier": "^1.7.4"
   }
 }

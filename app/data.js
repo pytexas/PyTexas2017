@@ -1,6 +1,6 @@
 import { image } from "./filters";
 
-var YEAR = '2017';
+var YEAR = "2017";
 
 export var NAV_LINKS = [
   // {
@@ -36,40 +36,43 @@ export var NAV_LINKS = [
   }
 ];
 
-export function get_data () {
-  return new Promise(function (resolve, reject) {
-    axios.get(`/conference/data/${YEAR}.json`)
-      .then(function (result) {
+export function get_data() {
+  return new Promise(function(resolve, reject) {
+    axios
+      .get(`/conference/data/${YEAR}.json`)
+      .then(function(result) {
         resolve(result);
       })
-      .catch(function (error) {
+      .catch(function(error) {
         reject(error);
       });
   });
 }
 
-export function extract_nodes (edges) {
+export function extract_nodes(edges) {
   var extracted = [];
-  
-  edges.forEach(function (edge) {
+
+  edges.forEach(function(edge) {
     extracted.push(edge.node);
   });
-  
-  return extracted
+
+  return extracted;
 }
 
-export function extract_sponsors (data) {
+export function extract_sponsors(data) {
   var sponsors = [];
-  data.allConfs.edges[0].node.sponsorshiplevelSet.edges.forEach(function (level) {
+  data.allConfs.edges[0].node.sponsorshiplevelSet.edges.forEach(function(
+    level
+  ) {
     if (level.node.sponsorSet.edges.length > 0) {
       let formatted = Object.assign({}, level.node);
-      
+
       formatted.sponsors = extract_nodes(level.node.sponsorSet.edges);
       delete formatted.sponsorSet;
-      
+
       sponsors.push(formatted);
     }
   });
-  
+
   return sponsors;
 }

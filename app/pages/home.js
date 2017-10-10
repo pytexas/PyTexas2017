@@ -18,12 +18,12 @@ var Home = Vue.component("home-page", {
     resize: resize,
     init() {
       get_data()
-      .then((result) => {
-        this.sponsors = extract_sponsors(result.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+        .then(result => {
+          this.sponsors = extract_sponsors(result.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
   }
 });

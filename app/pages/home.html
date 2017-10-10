@@ -13,23 +13,22 @@
           119 Nueces St
         </a>
       </h3>
-      <p>
-        <br>
-        Tickets now on sale.
-        <br><br>
-        <md-button href="https://www.eventbrite.com/e/pytexas-2017-registration-37631657300" target="_blank" class="md-raised md-primary">
-          Register On EventBrite
-        </md-button>
-      </p>
-      <md-divider></md-divider>
-      <p>
-        <br>
-        Become a PyTexas Sponsor
-        <br><br>
-        <router-link tag="md-button" to="/page/sponsors/prospectus" class="md-raised md-accent">
-          Sponsor Prospectus
-        </router-link>
-      </p>
+      <div class="main-links">
+        <p>
+          Tickets now on sale.
+          <br><br>
+          <md-button href="https://www.eventbrite.com/e/pytexas-2017-registration-37631657300" target="_blank" class="md-raised md-primary">
+            Register On EventBrite
+          </md-button>
+        </p>
+        <p>
+          Become a PyTexas Sponsor
+          <br><br>
+          <router-link tag="md-button" to="/page/sponsors/prospectus" class="md-raised md-accent">
+            Sponsor Prospectus
+          </router-link>
+        </p>
+      </div>
       <md-divider></md-divider>
       <h3>Our Sponsors</h3>
       <div class="level" v-for="level in sponsors">

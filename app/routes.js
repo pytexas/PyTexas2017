@@ -2,11 +2,13 @@ import VueRouter from "vue-router";
 
 import Home from "./pages/home";
 import mdPage from "./pages/md-page";
+import Sponsors from "./pages/sponsors";
 
 const NotFound = { template: "#tpl-404" };
 
 export var Routes = [
   { path: "/page/:slug(.*)", name: "md-page", component: mdPage, props: true },
+  { path: "/sponsors", name: "sponsors", component: Sponsors },
   { path: "/", name: "home", component: Home },
   { path: "*", component: NotFound }
 ];

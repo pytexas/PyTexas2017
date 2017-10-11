@@ -25,6 +25,11 @@ export var VENUE_TABS = [
   { name: "Hotels", url: "/page/venue/hotels" }
 ];
 
+export var SPONSOR_TABS = [
+  { name: "Sponsor Prospectus", url: "/page/sponsors/prospectus" },
+  { name: "Our Sponsors", url: "/sponsors" }
+];
+
 var SubNav = Vue.component("sub-nav", {
   template: "#tpl-widgets-sub-nav",
   watch: { $route: "init" },
@@ -58,13 +63,15 @@ var SubNav = Vue.component("sub-nav", {
     },
     init() {
       this.tabs = null;
-
+      
       if (this.$route.path.indexOf("/page/about/") === 0) {
         this.tabs = [...ABOUT_TABS];
       } else if (this.$route.path.indexOf("/page/community/") === 0) {
         this.tabs = [...COMMUNITY_TABS];
       } else if (this.$route.path.indexOf("/page/venue/") === 0) {
         this.tabs = [...VENUE_TABS];
+      } else if (this.$route.path.indexOf("/sponsors") > -1) {
+        this.tabs = [...SPONSOR_TABS];
       }
 
       if (this.tabs) {

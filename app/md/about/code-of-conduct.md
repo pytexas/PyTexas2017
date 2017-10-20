@@ -16,4 +16,7 @@ jokes are not appropriate for PyTexas.
 Attendees violating these rules may be asked to leave the conference without a
 refund at the sole discretion of the conference organizers.
 
+**If you believe an individual has violated this Code of Conduct, please email
+conference@pytexas.org or locate any conference Organizer.**
+
 Thank you for helping make this a welcoming, friendly event for all.

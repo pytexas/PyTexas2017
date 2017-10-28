@@ -63,7 +63,7 @@ var SubNav = Vue.component("sub-nav", {
     },
     init() {
       this.tabs = null;
-      
+
       if (this.$route.path.indexOf("/page/about/") === 0) {
         this.tabs = [...ABOUT_TABS];
       } else if (this.$route.path.indexOf("/page/community/") === 0) {

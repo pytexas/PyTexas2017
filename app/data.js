@@ -3,11 +3,11 @@ import { image } from "./filters";
 var YEAR = "2017";
 
 export var NAV_LINKS = [
-  // {
-  //   name: "Speaking",
-  //   url: "/page/talks/speaking",
-  //   icon: image("img/icons/talks.svg")
-  // },
+  {
+    name: "Talks",
+    url: "/program",
+    icon: image("img/icons/talks.svg")
+  },
   {
     name: "Sponsor",
     url: "/page/sponsors/prospectus",
@@ -75,4 +75,11 @@ export function extract_sponsors(data) {
   });
 
   return sponsors;
+}
+
+export function extract_sessions(data) {
+  return extract_nodes(data.allSessions.edges).map(function(session) {
+    session.slug = session.name.toLowerCase().replace(/\s+/g, "-");
+    return session;
+  });
 }

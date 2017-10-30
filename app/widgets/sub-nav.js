@@ -30,6 +30,11 @@ export var SPONSOR_TABS = [
   { name: "Our Sponsors", url: "/sponsors" }
 ];
 
+export var TALK_TABS = [
+  //{ name: "Schedule", url: "/schedule" },
+  { name: "Program", url: "/program" }
+];
+
 var SubNav = Vue.component("sub-nav", {
   template: "#tpl-widgets-sub-nav",
   watch: { $route: "init" },
@@ -72,6 +77,8 @@ var SubNav = Vue.component("sub-nav", {
         this.tabs = [...VENUE_TABS];
       } else if (this.$route.path.indexOf("/sponsors") > -1) {
         this.tabs = [...SPONSOR_TABS];
+      } else if (this.$route.path.indexOf("/program") > -1) {
+        this.tabs = [...TALK_TABS];
       }
 
       if (this.tabs) {

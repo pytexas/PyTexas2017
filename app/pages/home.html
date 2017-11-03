@@ -5,10 +5,10 @@
       <img :src="'img/atx.svg' | image" alt="ATX" class="atx">
       <h2>November 18<sup>th</sup>-19<sup>th</sup>, Austin Texas</h2>
       <h3>
-        Venue: 
+        Venue:
         <a href="https://www.galvanize.com/austin/campus" target="_blank">
           Galvanize Austin
-        </a> - 
+        </a> -
         <a href="https://goo.gl/maps/gkkQaKKugPs" target="_blank">
           119 Nueces St
         </a>
@@ -29,14 +29,76 @@
           </router-link>
         </p>
       </div>
-      <md-divider></md-divider>
-      <h3>Our Sponsors</h3>
-      <div class="level" v-for="level in sponsors">
-        <h4>{{ level.name }}</h4>
-        <a v-for="s in level.sponsors" :href="s.url" target="_blank">
-          <img :src="resize(s.logoUrl, 150, 150)" :alt="s.name">
-        </a>
-      </div>
     </md-card-content>
+  </md-card>
+
+  <md-divider/>
+
+  <md-card>
+    <md-card-header-text>
+      <h1>Keynote Speakers</h1>
+    </md-card-header-text>
+    <md-card class="keynote" v-for="(keynote, index) in keynotes" :id="keynote.slug">
+    <md-card-header>
+      <md-layout v-if="index % 2 === 0">
+        <md-layout md-hide-small-and-up>
+          <md-avatar>
+          <!--<img :src="'https://pytexas.s3.amazonaws.com/' + keynote.user.avatar"/>-->
+            <img src="https://i.imgur.com/L2qX37R.jpg"/>
+          </md-avatar>
+        </md-layout>
+        <md-layout md-flex-xsmall="100" md-flex-medium="50" md-flex-large="66">
+          <md-card-header-text>
+            <div class="md-title">{{ keynote.user.name }}</div>
+            <div class="md-subhead">{{ keynote.user.title }}</div>
+            <div class="md-card-content">{{ keynote.user.biography }}</div>
+          </md-card-header-text>
+        </md-layout>
+        <md-layout md-flex md-hide-xsmall md-flex-medium="50" md-flex-large="33">
+          <md-avatar>
+          <!--<img :src="'https://pytexas.s3.amazonaws.com/' + keynote.user.avatar"/>-->
+            <img src="https://i.imgur.com/L2qX37R.jpg"/>
+          </md-avatar>
+        </md-layout>
+        </md-layout>
+      </md-layout>
+      <md-layout v-else>
+        <md-layout md-hide-small-and-up>
+          <md-avatar>
+          <!--<img :src="'https://pytexas.s3.amazonaws.com/' + keynote.user.avatar"/>-->
+            <img src="https://i.imgur.com/L2qX37R.jpg"/>
+          </md-avatar>
+        </md-layout>
+
+        <md-layout md-flex md-hide-xsmall md-flex-medium="50" md-flex-large="33">
+          <md-avatar>
+          <!--<img :src="'https://pytexas.s3.amazonaws.com/' + keynote.user.avatar"/>-->
+            <img src="https://i.imgur.com/L2qX37R.jpg"/>
+          </md-avatar>
+        </md-layout>
+        <md-layout md-flex-xsmall="100" md-flex-medium="50" md-flex-large="66">
+          <md-card-header-text>
+            <div class="md-title">{{ keynote.user.name }}</div>
+            <div class="md-subhead">{{ keynote.user.title }}</div>
+            <div class="md-card-content">{{ keynote.user.biography }}</div>
+          </md-card-header-text>
+        </md-layout>
+      </md-layout>
+    </md-card-header>
+  </md-card>
+  </md-card>
+
+  <md-divider/>
+
+  <md-card>
+    <md-card-header-text>
+      <h1>Our Sponsors</h1>
+    </md-card-header-text>
+    <div class="level" v-for="level in sponsors">
+      <h4>{{ level.name }}</h4>
+      <a v-for="s in level.sponsors" :href="s.url" target="_blank">
+        <img :src="resize(s.logoUrl, 150, 150)" :alt="s.name">
+      </a>
+    </div>
   </md-card>
 </div>

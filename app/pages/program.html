@@ -1,13 +1,13 @@
 <div class="program-page">
   <md-card>
     <md-card-content>
-      <h1>Talk List</h1>
+      <h1>Schedule - {{ title }}</h1>
       <div class="session" v-for="session in sessions" :id="session.slug">
         <hr>
         <a :href="'#' + session.slug">
           <h2>{{ session.name }}</h2>
         </a>
-        <h3>{{ session.user.name }}</h3>
+        <h3>{{ session.start|time }} - {{ session.user.name }}</h3>
         <p>{{ session.description}}</p>
       </div>
     </md-card-content>

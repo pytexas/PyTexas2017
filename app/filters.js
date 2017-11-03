@@ -11,3 +11,7 @@ export function resize(url, w, h) {
 
   return `https://pytx.imgix.net${url}?w=${w}&h=${h}`;
 }
+
+export function time (dt) {
+  return dt.toLocaleTimeString();
+}

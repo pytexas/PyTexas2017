@@ -77,10 +77,30 @@ export function extract_sponsors(data) {
   return sponsors;
 }
 
-export function extract_sessions(data) {
-  return extract_nodes(data.allSessions.edges).map(function(session) {
+export function extract_sessions(data, day) {
+  var sessions = {};
+  
+  extract_nodes(data.allSessions.edges).forEach(function(session) {
     session.slug = session.name.toLowerCase().replace(/\s+/g, "-");
-    return session;
+    session.start = session.start.replace('+00:00', '');
+    session.start = new Date(session.start);
+    
+    var d = session.start.getDate();
+    if (sessions[d]) {
+      sessions[d].push(session);
+    } else {
+      sessions[d] = [session];
+    }
+  });
+  
+  return sessions[day].sort(function (a, b) {
+    if (a.start < b.start) {
+      return -1;
+    } else if (a.start > b.start) {
+      return 1;
+    }
+    
+    return 0;
   });
 }
 

@@ -8,7 +8,8 @@ var Home = Vue.component("home-page", {
   filters: { image: image },
   data() {
     return {
-      sponsors: []
+      sponsors: [],
+      keynotes: []
     };
   },
   created() {

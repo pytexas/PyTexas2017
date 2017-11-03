@@ -83,3 +83,10 @@ export function extract_sessions(data) {
     return session;
   });
 }
+
+export function extract_keynotes(data) {
+  return extract_nodes(data.allKeynotes.edges).map(function(keynote) {
+    keynote.slug = keynote.name.toLowerCase().replace(/\s+/g, "-");
+    return keynote;
+  });
+}

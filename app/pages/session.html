@@ -1,0 +1,11 @@
+<div class="session">
+  <h2>{{ session.name }}</h2>
+  <h3>{{ session.user.name }}</h3>
+  <h4>
+    {{ session.start|time }} - {{ session.end|time }}
+  </h4>
+  <h5 v-if="!session.allRooms">
+    {{ session.room.name }}
+  </h5>
+  <p>{{ session.description}}</p>
+</div>

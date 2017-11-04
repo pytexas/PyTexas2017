@@ -1,8 +1,78 @@
+@import "styles";
+
 .program-page {
   h1 {
     text-align: center;
   }
 
   .session {
+    background-color: lighten(@lightPrimaryColor, 7%);
+    border-radius: 5px;
+    height: 100%;
+    min-width: 250px;
+    padding: 8px;
+    
+    h2 {
+      margin: 0 0 7px 0;
+      font-size: 1.3rem;
+    }
+    
+    h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: normal;
+    }
+    
+    h4 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: normal;
+      font-style: italic;
+    }
+    
+    h5 {
+      margin: 0;
+      font-size: 1.0rem;
+      font-weight: normal;
+    }
+    
+    p {
+      font-size: 0.9rem;
+    }
+  }
+  
+  .rooms {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .all {
+    padding-bottom: 10px;
+  }
+  
+  .room {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding-left: 5px;
+    padding-bottom: 10px;
+    
+    &:first-child {
+      padding-left: 0;
+      padding-right: 5px;
+    }
+    
+    @media (max-width: 542px) {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
+  
+  .room > div {
+    height: 100%;
+    
+    &:nth-child(2) {
+      margin-top: 10px;
+    }
   }
 }

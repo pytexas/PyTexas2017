@@ -2,13 +2,17 @@
   <md-card>
     <md-card-content>
       <h1>Schedule - {{ title }}</h1>
-      <div class="session" v-for="session in sessions" :id="session.slug">
-        <hr>
-        <a :href="'#' + session.slug">
-          <h2>{{ session.name }}</h2>
-        </a>
-        <h3>{{ session.start|time }} - {{ session.user.name }}</h3>
-        <p>{{ session.description}}</p>
+      <div class="container" v-for="container in sessions">
+        <div v-if="container.allRooms" class="all">
+          <program-session :session="container"></program-session>
+        </div>
+        <div v-if="!container.allRooms" class="rooms">
+          <div v-for="room in container" class="room">
+            <div v-for="s in room">
+              <program-session :session="s"></program-session>
+            </div>
+          </div>
+        </div>
       </div>
     </md-card-content>
   </md-card>

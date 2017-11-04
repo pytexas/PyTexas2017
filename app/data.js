@@ -84,6 +84,10 @@ export function extract_sessions(data, day) {
     session.slug = session.name.toLowerCase().replace(/\s+/g, "-");
     session.start = session.start.replace('+00:00', '');
     session.start = new Date(session.start);
+    if (session.end) {
+      session.end = session.end.replace('+00:00', '');
+      session.end = new Date(session.end);
+    }
     
     var d = session.start.getDate();
     if (sessions[d]) {

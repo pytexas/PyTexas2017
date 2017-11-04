@@ -36,9 +36,11 @@ export var Program = Vue.component("program-page", {
           
           sessions.forEach((s) => {
             var key = s.start.toLocaleTimeString();
-            if (this.rooms.indexOf(s.room.id) > -1) {}
-            else {
-              this.rooms.push(s.room.id);
+            if (s.room) {
+              if (this.rooms.indexOf(s.room.id) > -1) {}
+              else {
+                this.rooms.push(s.room.id);
+              }
             }
             
             if (date_map[key]) {

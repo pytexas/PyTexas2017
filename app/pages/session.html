@@ -4,7 +4,7 @@
   <h4>
     {{ session.start|time }} - {{ session.end|time }}
   </h4>
-  <h5 v-if="!session.allRooms">
+  <h5 v-if="session.room && !session.allRooms">
     {{ session.room.name }}
   </h5>
   <p>{{ session.description}}</p>

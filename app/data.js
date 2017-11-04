@@ -9,11 +9,6 @@ export var NAV_LINKS = [
     icon: image("img/icons/talks.svg")
   },
   {
-    name: "Sponsor",
-    url: "/page/sponsors/prospectus",
-    icon: image("img/icons/sponsors.svg")
-  },
-  {
     name: "About",
     url: "/page/about/registration",
     icon: image("img/icons/about.svg")
@@ -27,6 +22,11 @@ export var NAV_LINKS = [
     name: "Community",
     url: "/page/community/meetups",
     icon: image("img/icons/community.svg")
+  },
+  {
+    name: "Sponsor",
+    url: "/page/sponsors/prospectus",
+    icon: image("img/icons/sponsors.svg")
   },
   {
     name: "Blog",

@@ -10,6 +10,7 @@ export var Program = Vue.component("program-page", {
   data() {
     return {
       sessions: [],
+      rooms: [],
       title: "Program"
     };
   },
@@ -31,13 +32,13 @@ export var Program = Vue.component("program-page", {
           var sessions = extract_sessions(result.data, parseInt(this.day));
           var date_map = {};
           var structured = [];
-          var rooms = [];
+          this.rooms = [];
           
-          sessions.forEach(function (s) {
+          sessions.forEach((s) => {
             var key = s.start.toLocaleTimeString();
-            if (rooms.indexOf(s.room.id) > -1) {}
+            if (this.rooms.indexOf(s.room.id) > -1) {}
             else {
-              rooms.push(s.room.id);
+              this.rooms.push(s.room.id);
             }
             
             if (date_map[key]) {
@@ -46,8 +47,8 @@ export var Program = Vue.component("program-page", {
               date_map[key] = {count: 1, allRooms: s.allRooms};
             }
           });
-          console.log(date_map);
           
+          this.rooms.sort();
           var last_date = null;
           sessions.forEach(function (s) {
             var key = s.start.toLocaleTimeString();
@@ -56,21 +57,20 @@ export var Program = Vue.component("program-page", {
             } else {
               if (date_map[key].count == 2) {
                 if (key == last_date) {
-                  structured[structured.length - 1].push([s]);
+                  structured[structured.length - 1][s.room.id] = [s];
                 } else {
-                  structured.push([[s]]);
+                  let temp = {};
+                  temp[s.room.id] = [s];
+                  structured.push(temp);
                 }
               } else {
-                let index = rooms.indexOf(s.room.id);
-                structured[structured.length - 1][index].push(s);
+                structured[structured.length - 1][s.room.id].push(s);
               }
             }
             
             last_date = key;
           });
           
-          console.log(rooms);
-          console.log(structured);
           this.sessions = structured;
         })
         .catch(error => {

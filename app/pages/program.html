@@ -7,8 +7,8 @@
           <program-session :session="container"></program-session>
         </div>
         <div v-if="!container.allRooms" class="rooms">
-          <div v-for="room in container" class="room">
-            <div v-for="s in room">
+          <div v-for="room in rooms" class="room">
+            <div v-for="s in container[room]">
               <program-session :session="s"></program-session>
             </div>
           </div>

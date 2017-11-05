@@ -77,6 +77,24 @@ export function extract_sponsors(data) {
   return sponsors;
 }
 
+export function extract_talk(data, id) {
+  for (let i =0; i < data.allSessions.edges.length; i++) {
+    let session = data.allSessions.edges[i].node;
+    if (session.id == id) {
+      return session;
+    }
+  }
+}
+
+export function extract_speaker(data, id) {
+  for (let i =0; i < data.allSessions.edges.length; i++) {
+    let session = data.allSessions.edges[i].node;
+    if (session.user && session.user.id == id) {
+      return session.user;
+    }
+  }
+}
+
 export function extract_sessions(data, day) {
   var sessions = {};
   

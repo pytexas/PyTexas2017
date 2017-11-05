@@ -1,0 +1,26 @@
+<div class="talk-page">
+  <md-card v-if="talk">
+    <md-card-content>
+      <div v-if="talk.user.image" class="speakimg">
+        <md-avatar>
+          <img :src="resize(talk.user.image, 256, 256)">
+        </md-avatar>
+      </div>
+      <h1>
+        {{ talk.name }}
+      </h1>
+      <h3>
+        <router-link :to="{name: 'speaker', params: {id: talk.user.id}}">
+          {{ talk.user.name }}
+        </router-link>
+      </h3>
+      <h4>
+        {{ talk.startStr }} - {{ talk.endStr }}
+      </h4>
+      <h5 v-if="talk.room && !talk.allRooms">
+        {{ talk.room.name }}
+      </h5>
+      <p>{{ talk.description}}</p>
+    </md-card-content>
+  </md-card>
+</div>

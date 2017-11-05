@@ -3,6 +3,10 @@ export function image(path) {
 }
 
 export function resize(url, w, h) {
+  if (url.indexOf('gravatar') > -1) {
+    return url.replace('s=256', 's=' + w);
+  }
+  
   if (DEBUG) {
     return url;
   }

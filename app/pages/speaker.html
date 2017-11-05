@@ -1,0 +1,15 @@
+<div class="talk-page">
+  <md-card v-if="speaker">
+    <md-card-content>
+      <div v-if="speaker.image" class="speakimg">
+        <md-avatar>
+          <img :src="resize(speaker.image, 256, 256)">
+        </md-avatar>
+      </div>
+      <h1>
+        {{ speaker.name }}
+      </h1>
+      <p>{{ speaker.biography }}</p>
+    </md-card-content>
+  </md-card>
+</div>

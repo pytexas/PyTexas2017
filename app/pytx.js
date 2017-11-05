@@ -125,10 +125,13 @@ function start_socket () {
   };
   
   ws.onmessage = function (msg) {
-    console.log('VERSION', msg.data);
-    if (msg.data != RELEASE) {
+    var r = msg.data;
+    
+    console.log('VERSION', r);
+    
+    if (r != RELEASE) {
       UPDATE_NEEDED = true;
-      clear_all_cache(msg.data);
+      clear_all_cache(r);
     }
   };
 }

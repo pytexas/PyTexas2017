@@ -10,7 +10,8 @@ var Talk = Vue.component("talk-page", {
   data() {
     return {
       talk: null,
-      title: 'Talk'
+      title: 'Talk',
+      html: ''
     };
   },
   created() {
@@ -25,6 +26,9 @@ var Talk = Vue.component("talk-page", {
           this.talk = extract_talk(results.data, this.id);
           this.title = this.talk.name;
           this.$router.set_title(this.title);
+          
+          var converter = new showdown.Converter({ tables: true });
+          this.html = converter.makeHtml(this.talk.description);
         })
         .catch(error => {
           console.error(error);

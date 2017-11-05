@@ -53,9 +53,13 @@
         </md-layout>
         <md-layout md-flex-xsmall="100" md-flex-medium="50" md-flex-large="66">
           <md-card-header-text>
-            <div class="md-title">{{ keynote.user.name }}</div>
+            <div class="md-title">
+              <router-link :to="{name: 'speaker', params: {id: keynote.user.id}}">
+                {{ keynote.user.name }}
+              </router-link>
+            </div>
             <div class="md-subhead">{{ keynote.user.title }}</div>
-            <div class="md-card-content">{{ keynote.user.biography }}</div>
+            <div class="md-card-content" v-html="keynote.user.biography"></div>
           </md-card-header-text>
         </md-layout>
         <md-layout md-flex md-hide-xsmall md-flex-medium="50" md-flex-large="33">
@@ -79,9 +83,13 @@
         </md-layout>
         <md-layout md-flex-xsmall="100" md-flex-medium="50" md-flex-large="66">
           <md-card-header-text>
-            <div class="md-title">{{ keynote.user.name }}</div>
+            <div class="md-title">
+              <router-link :to="{name: 'speaker', params: {id: keynote.user.id}}">
+                {{ keynote.user.name }}
+              </router-link>
+            </div>
             <div class="md-subhead">{{ keynote.user.title }}</div>
-            <div class="md-card-content">{{ keynote.user.biography }}</div>
+            <div class="md-card-content" v-html="keynote.user.biography"></div>
           </md-card-header-text>
         </md-layout>
       </md-layout>

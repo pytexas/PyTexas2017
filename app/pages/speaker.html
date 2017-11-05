@@ -9,7 +9,7 @@
       <h1>
         {{ speaker.name }}
       </h1>
-      <p>{{ speaker.biography }}</p>
+      <div v-html="bio"></div>
       <p>
         <span v-if="speaker.website">
           <md-button :href="speaker.website" target="_blank" class="md-raised">

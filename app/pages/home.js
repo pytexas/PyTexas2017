@@ -22,6 +22,11 @@ var Home = Vue.component("home-page", {
         .then(result => {
           this.sponsors = extract_sponsors(result.data);
           this.keynotes = extract_keynotes(result.data);
+          
+          var converter = new showdown.Converter({ tables: true });
+          this.keynotes.forEach((keynote) => {
+            keynote.user.biography = converter.makeHtml(keynote.user.biography);
+          });
         })
         .catch(error => {
           console.error(error);

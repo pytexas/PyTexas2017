@@ -18,7 +18,8 @@ var Speaker = Vue.component("speaker-page", {
   data() {
     return {
       speaker: null,
-      title: 'Speaker'
+      title: 'Speaker',
+      bio: ''
     };
   },
   created() {
@@ -34,6 +35,9 @@ var Speaker = Vue.component("speaker-page", {
           this.speaker = extract_speaker(results.data, this.id);
           this.title = this.speaker.name;
           this.$router.set_title(this.title);
+          
+          var converter = new showdown.Converter({ tables: true });
+          this.bio = converter.makeHtml(this.speaker.biography);
         })
         .catch(error => {
           console.error(error);

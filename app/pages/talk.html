@@ -22,7 +22,7 @@
       <h5 v-if="talk.room && !talk.allRooms">
         {{ talk.room.name }}
       </h5>
-      <p>{{ talk.description}}</p>
+      <div v-html="html"></div>
     </md-card-content>
   </md-card>
 </div>

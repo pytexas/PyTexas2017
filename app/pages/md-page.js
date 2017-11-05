@@ -26,6 +26,7 @@ var mdPage = Vue.component("md-page", {
   watch: { $route: "init" },
   methods: {
     init() {
+      console.log(this.slug);
       axios
         .get(URLS.md[this.slug + ".md"])
         .then(response => {

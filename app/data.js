@@ -14,8 +14,8 @@ export var NAV_LINKS = [
     icon: image("img/icons/about.svg")
   },
   {
-    name: "Venue",
-    url: "/page/venue/map",
+    name: "Location",
+    url: "/page/venue",
     icon: image("img/icons/venue.svg")
   },
   {
@@ -82,12 +82,7 @@ export function extract_sessions(data, day) {
   
   extract_nodes(data.allSessions.edges).forEach(function(session) {
     session.slug = session.name.toLowerCase().replace(/\s+/g, "-");
-    session.start = session.start.replace('+00:00', '');
     session.start = new Date(session.start);
-    if (session.end) {
-      session.end = session.end.replace('+00:00', '');
-      session.end = new Date(session.end);
-    }
     
     var d = session.start.getDate();
     if (sessions[d]) {

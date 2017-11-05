@@ -53,12 +53,13 @@ var app = new Vue({
 
       setTimeout(() => {
         this.check_update();
-      }, 60 * 1000);
+      }, 1000);
     },
     do_update() {
       console.log("Doing Update");
       REGISTRATION.update().then(function() {
-        clear_all_cache(NEWEST_RELEASE);
+        //clear_all_cache(NEWEST_RELEASE);
+        location.reload();
       });
     },
     report_ref(side) {
@@ -78,7 +79,6 @@ function clear_all_cache(NEWEST_RELEASE) {
     var msg_chan = new MessageChannel();
     msg_chan.port1.onmessage = function(event) {
       console.log("Cache:", event.data);
-      location.reload();
     };
 
     navigator.serviceWorker.controller.postMessage(
@@ -87,17 +87,6 @@ function clear_all_cache(NEWEST_RELEASE) {
     );
   }
 }
-
-var CHECK_RELEASE_INTERVAL = 60 * 1000;
-var CHECK_DELTA = 5 * 60 * 1000;
-var LAST_CHECK = Date.now();
-
-if (DEBUG) {
-  CHECK_RELEASE_INTERVAL = 5 * 1000;
-  CHECK_DELTA = 20 * 1000;
-}
-
-var intervalID = null;
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function() {
@@ -109,8 +98,7 @@ if ("serviceWorker" in navigator) {
       function(registration) {
         // Registration was successful
         REGISTRATION = registration;
-        check_release();
-        intervalID = setInterval(check_release, CHECK_RELEASE_INTERVAL);
+        start_socket();
 
         console.log(
           "ServiceWorker registration successful with scope: ",
@@ -125,51 +113,22 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-function get_sw_release() {
-  if (
-    navigator.serviceWorker.controller &&
-    navigator.serviceWorker.controller.postMessage
-  ) {
-    var msg_chan = new MessageChannel();
-    msg_chan.port1.onmessage = function(event) {
-      console.log("SW Release", event.data);
-      SW_RELEASE = event.data;
-    };
-
-    navigator.serviceWorker.controller.postMessage({ task: "release" }, [
-      msg_chan.port2
-    ]);
-  }
-}
-
-var NEWEST_RELEASE = null;
-
-function check_release() {
-  if (Date.now() - LAST_CHECK >= CHECK_DELTA) {
-    LAST_CHECK = Date.now();
-  } else {
-    return;
-  }
-
-  console.log("Checking Release", SW_RELEASE);
-
-  if (REGISTRATION) {
-    if (SW_RELEASE) {
-      axios
-        .get("/release?ts=" + Date.now())
-        .then(response => {
-          NEWEST_RELEASE = response.data.release;
-
-          console.log(NEWEST_RELEASE, SW_RELEASE);
-          if (NEWEST_RELEASE != SW_RELEASE) {
-            console.log("UPDATE NEEDED");
-            UPDATE_NEEDED = true;
-            clearInterval(intervalID);
-          }
-        })
-        .catch(e => {});
-    } else {
-      get_sw_release();
+function start_socket () {
+  console.log('Starting Socket');
+  var url = URLS.main + '/release-stream';
+  
+  var ws = new WebSocket(url.replace('http', 'ws'));
+  
+  ws.onclose = function () {
+    console.log('closed restarting socket');
+    setTimeout(start_socket, 10000);
+  };
+  
+  ws.onmessage = function (msg) {
+    console.log('VERSION', msg.data);
+    if (msg.data != RELEASE) {
+      UPDATE_NEEDED = true;
+      clear_all_cache(msg.data);
     }
-  }
+  };
 }

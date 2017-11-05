@@ -10,6 +10,20 @@
         {{ speaker.name }}
       </h1>
       <p>{{ speaker.biography }}</p>
+      <p>
+        <span v-if="speaker.website">
+          <md-button :href="speaker.website" target="_blank" class="md-raised">
+            <md-icon :md-src="image('img/social/website.png')"></md-icon>
+            Website
+          </md-button>
+        </span>
+        <span v-if="speaker.socialHandles && speaker.socialHandles.edges.length > 0">
+          <md-button :href="social_link(h.node)" target="_blank" v-for="h in speaker.socialHandles.edges" :key="h.node.id" class="md-raised">
+            <md-icon :md-src="social_icon(h.node)"></md-icon>
+            {{ h.node.username }}
+          </md-button>
+        </span>
+      </p>
     </md-card-content>
   </md-card>
 </div>

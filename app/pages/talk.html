@@ -3,7 +3,9 @@
     <md-card-content>
       <div v-if="talk.user.image" class="speakimg">
         <md-avatar>
-          <img :src="resize(talk.user.image, 256, 256)">
+          <router-link :to="{name: 'speaker', params: {id: talk.user.id}}">
+            <img :src="resize(talk.user.image, 256, 256)">
+          </router-link>
         </md-avatar>
       </div>
       <h1>

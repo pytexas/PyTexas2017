@@ -15,5 +15,5 @@
   <h5 v-if="session.room && !session.allRooms">
     {{ session.room.name }}
   </h5>
-  <p>{{ session.description}}</p>
+  <div v-html="html"></div>
 </div>

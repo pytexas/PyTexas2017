@@ -85,7 +85,16 @@ export var Program = Vue.component("program-page", {
 export var Session = Vue.component("program-session", {
   template: "#tpl-pages-session",
   props: ['session'],
-  filters: { image: image, time: time }
+  filters: { image: image, time: time },
+  data() {
+    return {
+      html: ''
+    };
+  },
+  created() {
+    var converter = new showdown.Converter({ tables: true });
+    this.html = converter.makeHtml(this.session.description);
+  }
 });
 
 export default Program;

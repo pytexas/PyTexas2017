@@ -57,10 +57,13 @@ var app = new Vue({
     },
     do_update() {
       console.log("Doing Update");
-      REGISTRATION.update().then(function() {
-        //clear_all_cache(NEWEST_RELEASE);
+      if (REGISTRATION) {
+        REGISTRATION.update().then(function() {
+          location.reload();
+        });
+      } else {
         location.reload();
-      });
+      }
     },
     report_ref(side) {
       this.side = side;
@@ -73,6 +76,7 @@ var app = new Vue({
 
 function clear_all_cache(NEWEST_RELEASE) {
   if (
+    "serviceWorker" in navigator && 
     navigator.serviceWorker.controller &&
     navigator.serviceWorker.controller.postMessage
   ) {
@@ -91,6 +95,7 @@ function clear_all_cache(NEWEST_RELEASE) {
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function() {
     if (SKIP_SW) {
+      start_socket();
       return;
     }
 
@@ -111,6 +116,8 @@ if ("serviceWorker" in navigator) {
       }
     );
   });
+} else {
+  start_socket();
 }
 
 function start_socket () {

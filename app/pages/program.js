@@ -94,6 +94,12 @@ export var Session = Vue.component("program-session", {
   created() {
     var converter = new showdown.Converter({ tables: true });
     this.html = converter.makeHtml(this.session.description);
+  },
+  watch: {
+    session: function(val, oldVal) {
+      var converter = new showdown.Converter({ tables: true });
+      this.html = converter.makeHtml(this.session.  description);
+    }
   }
 });
 

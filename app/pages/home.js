@@ -19,9 +19,9 @@ var Home = Vue.component("home-page", {
     resize: resize,
     init() {
       get_data()
-        .then(result => {
-          this.sponsors = extract_sponsors(result.data);
-          this.keynotes = extract_keynotes(result.data);
+        .then(data => {
+          this.sponsors = extract_sponsors(data);
+          this.keynotes = extract_keynotes(data);
           
           var converter = new showdown.Converter({ tables: true });
           this.keynotes.forEach((keynote) => {

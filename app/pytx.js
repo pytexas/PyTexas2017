@@ -131,6 +131,8 @@ function start_socket () {
     
     if (r != RELEASE) {
       UPDATE_NEEDED = true;
+      API_DATA = null;
+      API_DATA_TS = null;
       clear_all_cache(r);
     }
   };

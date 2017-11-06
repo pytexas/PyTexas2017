@@ -19,8 +19,8 @@ var Sponsors = Vue.component("sponsors-page", {
     resize: resize,
     init() {
       get_data()
-        .then(result => {
-          this.sponsors = extract_sponsors(result.data);
+        .then(data => {
+          this.sponsors = extract_sponsors(data);
         })
         .catch(error => {
           console.error(error);

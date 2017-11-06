@@ -28,8 +28,8 @@ export var Program = Vue.component("program-page", {
       }
       
       get_data()
-        .then(result => {
-          var sessions = extract_sessions(result.data, parseInt(this.day));
+        .then(data => {
+          var sessions = extract_sessions(data, parseInt(this.day));
           var date_map = {};
           var structured = [];
           this.rooms = [];

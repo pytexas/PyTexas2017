@@ -38,14 +38,28 @@ export var NAV_LINKS = [
 
 export function get_data() {
   return new Promise(function(resolve, reject) {
-    axios
-      .get(`/conference/data/${YEAR}.json`)
-      .then(function(result) {
-        resolve(result);
-      })
-      .catch(function(error) {
-        reject(error);
-      });
+    if (API_DATA && API_DATA_TS) {
+      var diff = Date.now() - API_DATA_TS;
+      if (diff > 15 * 60 * 1000) {
+        API_DATA = null;
+        API_DATA_TS = null;
+      }
+    }
+    
+    if (API_DATA) {
+      resolve(JSON.parse(API_DATA));
+    } else {
+      axios
+        .get(`/conference/data/${YEAR}.json`)
+        .then(function(result) {
+          API_DATA = JSON.stringify(result.data);
+          API_DATA_TS = Date.now();
+          resolve(result.data);
+        })
+        .catch(function(error) {
+          reject(error);
+        });
+    }
   });
 }
 

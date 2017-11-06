@@ -22,8 +22,8 @@ var Talk = Vue.component("talk-page", {
     resize: resize,
     init() {
       get_data()
-        .then((results) => {
-          this.talk = extract_talk(results.data, this.id);
+        .then((data) => {
+          this.talk = extract_talk(data, this.id);
           this.title = this.talk.name;
           this.$router.set_title(this.title);
           

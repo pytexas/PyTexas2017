@@ -31,8 +31,8 @@ var Speaker = Vue.component("speaker-page", {
     resize: resize,
     init() {
       get_data()
-        .then((results) => {
-          this.speaker = extract_speaker(results.data, this.id);
+        .then((data) => {
+          this.speaker = extract_speaker(data, this.id);
           this.title = this.speaker.name;
           this.$router.set_title(this.title);
           

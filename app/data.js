@@ -104,7 +104,10 @@ export function extract_speaker(data, id) {
   for (let i = 0; i < data.allSessions.edges.length; i++) {
     let session = data.allSessions.edges[i].node;
     if (session.user && session.user.id == id) {
-      return session.user;
+      let user = session.user;
+      delete session.user;
+      user.session = session;
+      return user;
     }
   }
 }

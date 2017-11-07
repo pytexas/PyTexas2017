@@ -19,6 +19,14 @@
         </md-avatar>
       </md-layout>
       <md-layout v-html="bio" md-flex-large="100"></md-layout>
+      <md-layout v-if="speaker.session" md-flex-large="100">
+        <h2>
+          Talk:
+          <router-link :to="{name: 'talk', params: {id: speaker.session.id}}">
+            {{ speaker.session.name }}
+          </router-link>
+        </h2>
+      </md-layout>
       <md-layout md-flex-large="100">
         <p>
           <span v-if="speaker.website">

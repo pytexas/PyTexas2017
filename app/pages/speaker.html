@@ -6,9 +6,11 @@
           <img :src="resize(speaker.image, 256, 256)">
         </md-avatar>
       </div>
-      <h1>
-        {{ speaker.name }}
-      </h1>
+      <div>
+        <h1>{{ speaker.name }}</h1>
+        <h2>{{ speaker.title }}</h2>
+        <h3>{{ speaker.location }}</h3>
+      </div>
       <div v-html="bio"></div>
       <p>
         <span v-if="speaker.website">

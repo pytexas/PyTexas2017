@@ -27,7 +27,7 @@ export var SPONSOR_TABS = [
 
 export var TALK_TABS = [
   { name: "Saturday 11/18", url: "/program/18" },
-  { name: "Sunday 11/19", url: "/program/19" },
+  { name: "Sunday 11/19", url: "/program/19" }
 ];
 
 var SubNav = Vue.component("sub-nav", {

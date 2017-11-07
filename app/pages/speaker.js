@@ -4,38 +4,38 @@ import { image, resize } from "../filters";
 import { get_data, extract_speaker } from "../data";
 
 var SOCIAL_INFO = {
-  'ABOUT.ME': 'https://about.me/',
-  'FACEBOOK': 'https://facebook.com/',
-  'GITHUB': 'https://github.com/',
-  'GPLUS': 'https://plus.google.com/+',
-  'LINKEDIN': 'https://www.linkedin.com/in/',
-  'TWITTER': 'https://twitter.com/',
+  "ABOUT.ME": "https://about.me/",
+  FACEBOOK: "https://facebook.com/",
+  GITHUB: "https://github.com/",
+  GPLUS: "https://plus.google.com/+",
+  LINKEDIN: "https://www.linkedin.com/in/",
+  TWITTER: "https://twitter.com/"
 };
 
 var Speaker = Vue.component("speaker-page", {
   template: "#tpl-pages-speaker",
-  props: ['id'],
+  props: ["id"],
   data() {
     return {
       speaker: null,
-      title: 'Speaker',
-      bio: ''
+      title: "Speaker",
+      bio: ""
     };
   },
   created() {
     this.init();
   },
-  watch: {'$route': 'init'},
+  watch: { $route: "init" },
   methods: {
     image: image,
     resize: resize,
     init() {
       get_data()
-        .then((data) => {
+        .then(data => {
           this.speaker = extract_speaker(data, this.id);
           this.title = this.speaker.name;
           this.$router.set_title(this.title);
-          
+
           var converter = new showdown.Converter({ tables: true });
           this.bio = converter.makeHtml(this.speaker.biography);
         })

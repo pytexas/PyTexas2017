@@ -9,20 +9,20 @@ import Speaker from "./pages/speaker";
 
 const NotFound = { template: "#tpl-404" };
 
-function current_schedule (to) {
-  var d= new Date();
+function current_schedule(to) {
+  var d = new Date();
   if (d.getDate() == 19 && d.getMonth() == 10 && d.getFullYear() == 2017) {
-    return '/program/19';
+    return "/program/19";
   }
-  
-  return '/program/18';
+
+  return "/program/18";
 }
 
 export var Routes = [
   { path: "/page/:slug(.*)", name: "md-page", component: mdPage, props: true },
   { path: "/sponsors", name: "sponsors", component: Sponsors },
   { path: "/program/:day", name: "program", component: Program, props: true },
-  { path: "/program", name: "current-program", redirect: current_schedule},
+  { path: "/program", name: "current-program", redirect: current_schedule },
   { path: "/speaker/:id", name: "speaker", component: Speaker, props: true },
   { path: "/talk/:id", name: "talk", component: Talk, props: true },
   { path: "/", name: "home", component: Home },

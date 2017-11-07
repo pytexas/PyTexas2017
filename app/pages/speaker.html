@@ -1,29 +1,48 @@
-<div class="talk-page">
-  <md-card v-if="speaker">
-    <md-card-content>
-      <div v-if="speaker.image" class="speakimg">
+<md-card v-if="speaker" class="speaker-page">
+  <md-card-content>
+    <md-layout>
+      <md-layout v-if="speaker.image" md-hide-small-and-up md-flex-xsmall="100">
         <md-avatar>
           <img :src="resize(speaker.image, 256, 256)">
         </md-avatar>
-      </div>
-      <h1>
-        {{ speaker.name }}
-      </h1>
-      <div v-html="bio"></div>
-      <p>
-        <span v-if="speaker.website">
-          <md-button :href="speaker.website" target="_blank" class="md-raised">
-            <md-icon :md-src="image('img/social/website.png')"></md-icon>
-            Website
-          </md-button>
-        </span>
-        <span v-if="speaker.socialHandles && speaker.socialHandles.edges.length > 0">
-          <md-button :href="social_link(h.node)" target="_blank" v-for="h in speaker.socialHandles.edges" :key="h.node.id" class="md-raised">
-            <md-icon :md-src="social_icon(h.node)"></md-icon>
-            {{ h.node.username }}
-          </md-button>
-        </span>
-      </p>
-    </md-card-content>
-  </md-card>
-</div>
+      </md-layout>
+      <md-layout md-flex-large="66" md-flex-xsmall="100">
+        <div>
+          <h1>{{ speaker.name }}</h1>
+          <h2>{{ speaker.title }}</h2>
+          <h3>{{ speaker.location }}</h3>
+        </div>
+      </md-layout>
+      <md-layout v-if="speaker.image" md-flex-large="33" md-hide-xsmall>
+        <md-avatar>
+          <img :src="resize(speaker.image, 256, 256)">
+        </md-avatar>
+      </md-layout>
+      <md-layout v-html="bio" md-flex-large="100"></md-layout>
+      <md-layout v-if="speaker.session" md-flex-large="100">
+        <h2>
+          Talk:
+          <router-link :to="{name: 'talk', params: {id: speaker.session.id}}">
+            {{ speaker.session.name }}
+          </router-link>
+        </h2>
+      </md-layout>
+      <md-layout md-flex-large="100">
+        <p>
+          <span v-if="speaker.website">
+            <md-button :href="speaker.website" target="_blank" class="md-raised">
+              <md-icon :md-src="image('img/social/website.png')"></md-icon>
+              Website
+            </md-button>
+          </span>
+          <span v-if="speaker.socialHandles && speaker.socialHandles.edges.length > 0">
+            <md-button :href="social_link(h.node)" target="_blank" v-for="h in speaker.socialHandles.edges" :key="h.node.id" class="md-raised">
+              <md-icon :md-src="social_icon(h.node)"></md-icon>
+              {{ h.node.username }}
+            </md-button>
+          </span>
+        </p>
+      </md-layout>
+    </md-layout>
+  </md-card-content>
+</md-card>

@@ -45,7 +45,7 @@ export function get_data() {
         API_DATA_TS = null;
       }
     }
-    
+
     if (API_DATA) {
       resolve(JSON.parse(API_DATA));
     } else {
@@ -92,7 +92,7 @@ export function extract_sponsors(data) {
 }
 
 export function extract_talk(data, id) {
-  for (let i =0; i < data.allSessions.edges.length; i++) {
+  for (let i = 0; i < data.allSessions.edges.length; i++) {
     let session = data.allSessions.edges[i].node;
     if (session.id == id) {
       return session;
@@ -101,21 +101,24 @@ export function extract_talk(data, id) {
 }
 
 export function extract_speaker(data, id) {
-  for (let i =0; i < data.allSessions.edges.length; i++) {
+  for (let i = 0; i < data.allSessions.edges.length; i++) {
     let session = data.allSessions.edges[i].node;
     if (session.user && session.user.id == id) {
-      return session.user;
+      let user = session.user;
+      delete session.user;
+      user.session = session;
+      return user;
     }
   }
 }
 
 export function extract_sessions(data, day) {
   var sessions = {};
-  
+
   extract_nodes(data.allSessions.edges).forEach(function(session) {
     session.slug = session.name.toLowerCase().replace(/\s+/g, "-");
     session.start = new Date(session.start);
-    
+
     var d = session.start.getDate();
     if (sessions[d]) {
       sessions[d].push(session);
@@ -123,14 +126,14 @@ export function extract_sessions(data, day) {
       sessions[d] = [session];
     }
   });
-  
-  return sessions[day].sort(function (a, b) {
+
+  return sessions[day].sort(function(a, b) {
     if (a.start < b.start) {
       return -1;
     } else if (a.start > b.start) {
       return 1;
     }
-    
+
     return 0;
   });
 }

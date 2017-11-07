@@ -76,7 +76,7 @@ var app = new Vue({
 
 function clear_all_cache(NEWEST_RELEASE) {
   if (
-    "serviceWorker" in navigator && 
+    "serviceWorker" in navigator &&
     navigator.serviceWorker.controller &&
     navigator.serviceWorker.controller.postMessage
   ) {
@@ -120,22 +120,22 @@ if ("serviceWorker" in navigator) {
   start_socket();
 }
 
-function start_socket () {
-  console.log('Starting Socket');
-  var url = URLS.main + '/release-stream';
-  
-  var ws = new WebSocket(url.replace('http', 'ws'));
-  
-  ws.onclose = function () {
-    console.log('closed restarting socket');
+function start_socket() {
+  console.log("Starting Socket");
+  var url = URLS.main + "/release-stream";
+
+  var ws = new WebSocket(url.replace("http", "ws"));
+
+  ws.onclose = function() {
+    console.log("closed restarting socket");
     setTimeout(start_socket, 10000);
   };
-  
-  ws.onmessage = function (msg) {
+
+  ws.onmessage = function(msg) {
     var r = msg.data;
-    
-    console.log('VERSION', r);
-    
+
+    console.log("VERSION", r);
+
     if (r != RELEASE) {
       UPDATE_NEEDED = true;
       API_DATA = null;

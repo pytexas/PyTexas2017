@@ -1,7 +1,7 @@
 import Vue from "vue";
 
 export var ABOUT_TABS = [
-  { name: "Register", url: "/page/about/registration" },
+  //{ name: "Register", url: "/page/about/registration" },
   { name: "About The Conference", url: "/page/about/conference" },
   { name: "Privacy Policy", url: "/page/about/privacy" },
   { name: "Code of Conduct", url: "/page/about/code-of-conduct" },

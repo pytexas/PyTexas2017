@@ -1,0 +1,23 @@
+.program-page .room {
+  display: block !important;
+}
+
+.program-page .rooms {
+  display: block !important;
+}
+
+.md-layout {
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .md-layout.md-hide-xsmall {
+    display: none;
+  }
+}
+
+.home-page .keynote .md-avatar {
+  transform: none !important;
+  margin-right: 20px !important;
+  margin-bottom: 20px !important;
+}

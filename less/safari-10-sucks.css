@@ -16,6 +16,16 @@
   }
 }
 
+@media (min-width: 601px) {
+  .md-hide-small-and-up {
+    display: block;
+  }
+  
+  .md-layout.md-hide-xsmall {
+    display: none;
+  }
+}
+
 .home-page .keynote .md-avatar {
   transform: none !important;
   margin-right: 20px !important;

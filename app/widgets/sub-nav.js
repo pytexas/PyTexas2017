@@ -13,7 +13,7 @@ export var COMMUNITY_TABS = [
   { name: "Local Meetups", url: "/page/community/meetups" },
   {
     name: "Chat Room",
-    url: "https://gitter.im/pytexas/PyTexas",
+    url: "https://pytexas-slack.herokuapp.com/",
     external: true
   },
   { name: "Mailing List", url: "/page/community/mailing-list" },

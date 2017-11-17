@@ -36,14 +36,9 @@ var router = new VueRouter({
   mode: "history",
   routes: Routes,
   scrollBehavior: function(to, from, savedPosition) {
-    var scrolledTo = { x: 0, y: 0 };
-
-    if (savedPosition) {
-      scrolledTo = savedPosition;
-    }
-
-    //console.log('scroll', scrolledTo, performance.now());
-    return scrolledTo;
+    // console.log('scroll', savedPosition, performance.now());
+    
+    return savedPosition || {x: 0, y: 0};
   }
 });
 

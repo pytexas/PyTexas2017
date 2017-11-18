@@ -22,6 +22,16 @@
       <h5 v-if="talk.room && !talk.allRooms">
         {{ talk.room.name }}
       </h5>
+      <div v-if="talk.slides || talk.videoUrl">
+        <md-button target="_blank" class="md-raised" :href="talk.slides" v-if="talk.slides">
+          <md-icon>slideshow</md-icon>
+          Slides
+        </md-button>
+        <md-button target="_blank" class="md-raised" :href="talk.videoUrl" v-if="talk.videoUrl">
+          <md-icon>videocam</md-icon>
+          Video
+        </md-button>
+      </div>
       <div v-html="html"></div>
     </md-card-content>
   </md-card>

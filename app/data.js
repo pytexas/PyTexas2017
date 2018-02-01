@@ -1,6 +1,7 @@
 import { image } from "./filters";
 
 var YEAR = "2017";
+var DAYS = ['Sun', 'Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat'];
 
 export var NAV_LINKS = [
   {
@@ -146,6 +147,8 @@ export function extract_videos(data) {
     session.start = new Date(session.start);
     
     if (session.videoUrl) {
+      var d = session.start.getDay();
+      session.day = DAYS[d];
       videos.push(session);
     }
   });

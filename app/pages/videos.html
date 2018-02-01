@@ -2,16 +2,27 @@
   <md-card>
     <md-card-content>
       <h1>Videos</h1>
-      <ul>
-        <li v-for="s in sessions" :key="s.id">
-          <a :href="s.videoUrl" target="_blank">
-            {{ s.name }}
-            <span v-if="s.user && s.user.name">
-              by {{ s.user.name }}
-            </span> 
-          </a> 
-        </li>
-      </ul>
+      <table>
+        <tr v-for="s in sessions" :key="s.id">
+          <td>
+            <a :href="s.videoUrl" target="_blank">
+              {{ s.name }}
+              <span v-if="s.user && s.user.name">
+                by {{ s.user.name }}
+              </span> 
+            </a>
+          </td>
+          <td>
+            <a v-if="s.slides" :href="s.slides" target="_blank">
+              Slides
+            </a>
+          </td>
+          <td class="date">
+            {{ s.day }} 
+            {{ s.startStr }}
+          </td>
+        </tr>
+      </table>
     </md-card-content>
   </md-card>
 </div>

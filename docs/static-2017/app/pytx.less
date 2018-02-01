@@ -1,0 +1,137 @@
+@import "styles";
+@import "media";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background-color: lighten(@dividerColor, 22%) !important;
+  font-size: 1.2rem;
+  font-family: @bodyFont;
+}
+
+#app {
+  overflow-x: hidden;
+  position: relative;
+}
+
+#content {
+  display: flex;
+  padding-top: 65px;
+}
+
+.main-panel {
+  flex: 1;
+  flex-grow: 100;
+  padding-right: 100px;
+
+  @media @for-phone {
+    padding-right: 0;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: @headerFont;
+}
+
+.md-card {
+  max-width: 865px;
+  margin: 0 auto;
+
+  @media @for-phone {
+    margin: 0;
+    width: 100vw;
+  }
+
+  .md-card-header {
+    text-align: center;
+
+    h1 {
+      margin: 0;
+      line-height: normal;
+    }
+  }
+
+  .md-card-content {
+    font-size: 1.2rem;
+    line-height: normal;
+  }
+}
+
+.md-button {
+  &.txicon {
+    display: flex;
+    align-items: center;
+
+    .md-icon {
+      margin-right: 8px;
+    }
+  }
+
+  &.md-accent {
+    path {
+      fill: @accentColor;
+    }
+  }
+}
+
+.update {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 90px 0 -55px 0;
+  font-weight: bold;
+}
+
+footer {
+  font-size: 70%;
+  text-align: center;
+  margin: 20px 0;
+}
+
+iframe {
+  width: 100% !important;
+  height: 450px !important;
+}
+
+.schedule {
+  .all {
+    text-align: center;
+    background-color: @lightPrimaryColor;
+  }
+  .break {
+    text-align: center;
+    background-color: @dividerColor;
+    font-style: italic;
+  }
+  .time {
+    font-size: small;
+    padding: 0;
+  }
+  .talks {
+    padding: 0;
+  }
+  .talk {
+    padding: 8px 15px;
+    display: inline-block;
+    @media @for-desktop {
+      width: 49%;
+    }
+    @media @for-phone {
+      width: 100%;
+    }
+  }
+  .speaker {
+    font-size: small;
+  }
+}

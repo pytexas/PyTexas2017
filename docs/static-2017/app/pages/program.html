@@ -1,0 +1,19 @@
+<div class="program-page">
+  <md-card>
+    <md-card-content>
+      <h1>Schedule - {{ title }}</h1>
+      <div class="container" v-for="container in sessions">
+        <div v-if="container.allRooms" class="all">
+          <program-session :session="container"></program-session>
+        </div>
+        <div v-if="!container.allRooms" class="rooms">
+          <div v-for="room in rooms" class="room">
+            <div v-for="s in container[room]">
+              <program-session :session="s"></program-session>
+            </div>
+          </div>
+        </div>
+      </div>
+    </md-card-content>
+  </md-card>
+</div>

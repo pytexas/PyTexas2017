@@ -1,0 +1,13 @@
+<div class="sponsors-page">
+  <md-card>
+    <md-card-content>
+      <h1>PyTexas Sponsors</h1>
+      <div class="level" v-for="level in sponsors">
+        <h4>{{ level.name }}</h4>
+        <a v-for="s in level.sponsors" :href="s.url" target="_blank">
+          <img :src="resize(s.logoUrl, 250, 250)" :alt="s.name">
+        </a>
+      </div>
+    </md-card-content>
+  </md-card>
+</div>

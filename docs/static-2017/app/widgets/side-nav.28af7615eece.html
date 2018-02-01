@@ -1,0 +1,29 @@
+<div class="sidenav-wrapper">
+  <md-sidenav class="md-right md-fixed" ref="rightSidenav" @open="open('Right')" @close="close('Right')">
+    <md-toolbar>
+      <div class="md-toolbar-container">
+        <h3 class="md-title">Site Nav</h3>
+      </div>
+    </md-toolbar>
+    <md-list>
+      <md-list-item v-for="(link, index) in links" :key="index">
+        <div>
+          <md-button v-if="!link.external" class="md-accent txicon" @click="goto(link.url)">
+            <md-icon :md-src="link.icon"></md-icon>
+            {{ link.name }}
+          </md-button>
+          <md-button v-if="link.external" class="md-accent txicon" @click="closeRightSidenav" :href="link.url" target="_blank">
+            <md-icon :md-src="link.icon"></md-icon>
+            {{ link.name }}
+          </md-button>
+          <md-divider></md-divider>
+        </div>
+      </md-list-item>
+      <md-list-item>
+        <div>
+          <md-button class="md-primary" @click="closeRightSidenav">Close Nav</md-button>
+        </div>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
+</div>

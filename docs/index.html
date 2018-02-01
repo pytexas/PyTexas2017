@@ -1,2 +1,577 @@
-NARF
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Release: v178.0 -->
+    <title>PyTexas</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="PyTexas is the annual, regional gathering for the Python community in Texas, taking place November 18th-19th in Austin, TX">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="shortcut icon" href="/static-2017/favicon.e0ef81ea0dfa.ico">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/static-2017/img/manifest/apple-touch-icon.64065c2213d1.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static-2017/img/manifest/favicon-32x32.b77acf516693.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static-2017/img/manifest/favicon-16x16.eb834c7771fd.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/static-2017/img/manifest/safari-pinned-tab.8c3ed16d8205.svg" color="#5bbad5">
+
+    <meta name="apple-mobile-web-app-title" content="PyTexas 2017">
+    <meta name="application-name" content="PyTexas 2017">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <meta name="theme-color" content="#bdbdbd">
+
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      #splash {
+        height: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #splash img {
+        width: 128px;
+      }
+
+      #app {
+        display: none;
+      }
+
+      .main-panel > div > .md-card, .md-card.iconbg {
+        background-position: top center;
+        background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(/static-2017/img/icons/background.e5e4f4cb920f.png);
+        background-size: 100%;
+      }
+    </style>
+
+    
+    <link rel="stylesheet" href="/static-2017/vue-material.761d14073cd4.css">
+    <link rel="stylesheet" href="/static-2017/2017-dist/pytx.7cce2d362f2d.css">
+    
+  </head>
+  <body class="md-theme-default">
+    <div id="splash">
+      <img src="/static-2017/img/banner80.39225f4a7c1f.png" alt="PyTexas">
+    </div>
+    <div id="app">
+      <side-nav :report_ref="report_ref"></side-nav>
+      <top-bar :toggle="toggle"></top-bar>
+      <md-progress v-if="loading" class="md-accent main" md-indeterminate></md-progress>
+      <div v-if="update_needed" class="update">
+        New version available:
+        <md-button class="md-raised" @click="do_update()">
+          <md-icon>refresh</md-icon>
+          Update
+        </md-button>
+      </div>
+      <div id="content">
+        <left-nav></left-nav>
+        <div class="main-panel">
+          <sub-nav></sub-nav>
+          <router-view></router-view>
+        </div>
+      </div>
+      <footer>
+        <router-link to="/page/about/privacy">
+          Privacy Policy
+        </router-link>
+         &nbsp;|&nbsp;
+        <router-link to="/page/about/code-of-conduct">
+          Code of Conduct
+        </router-link>
+         &nbsp;|&nbsp;
+        Release: v178.0
+      </footer>
+    </div>
+    <script>
+      var DEBUG = false;
+      var URLS = {
+        main: 'https://www.pytexas.org',
+        static: '/static-2017/',
+        login: {
+          google: '/auth/social/login/google-oauth2/'
+        },
+        md: {
+          'venue.md': '/static-2017/2017-dist/md/venue.1f30f6158104.md',
+          'about/conference.md': '/static-2017/2017-dist/md/about/conference.b736d01c2398.md',
+          'about/privacy.md': '/static-2017/2017-dist/md/about/privacy.a1a374cb3929.md',
+          'about/diversity-statement.md': '/static-2017/2017-dist/md/about/diversity-statement.70f7331a7ebd.md',
+          'about/code-of-conduct.md': '/static-2017/2017-dist/md/about/code-of-conduct.1faa73e34732.md',
+          'about/registration.md': '/static-2017/2017-dist/md/about/registration.55024523c939.md',
+          'about/faq.md': '/static-2017/2017-dist/md/about/faq.b68b9e50f1c2.md',
+          'community/mailing-list.md': '/static-2017/2017-dist/md/community/mailing-list.a577ad78bb26.md',
+          'community/meetups.md': '/static-2017/2017-dist/md/community/meetups.5ec7c8f68ad9.md',
+          'community/employers.md': '/static-2017/2017-dist/md/community/employers.54916da57cb8.md',
+          'talks/speaking.md': '/static-2017/2017-dist/md/talks/speaking.a809bbdc09a6.md',
+          'sponsors/prospectus.md': '/static-2017/2017-dist/md/sponsors/prospectus.62baf01255af.md'
+          
+        }
+      };
+      var APP = {
+        name: 'PyTexas',
+        icon: '/static-2017/img/icon.d99d2b99008d.svg'
+      };
+
+      var IMAGES = {
+        "img/atx.svg": "/static-2017/img/atx.3ab5136e351b.svg",
+        "img/banner80.png": "/static-2017/img/banner80.39225f4a7c1f.png",
+        "img/icon.svg": "/static-2017/img/icon.d99d2b99008d.svg",
+        "img/icons/about.svg": "/static-2017/img/icons/about.764234acc6c0.svg",
+        "img/icons/blog.svg": "/static-2017/img/icons/blog.13fb6a09bcb5.svg",
+        "img/icons/chat.svg": "/static-2017/img/icons/chat.9843a75b860d.svg",
+        "img/icons/talks.svg": "/static-2017/img/icons/talks.9843a75b860d.svg",
+        "img/icons/community.svg": "/static-2017/img/icons/community.fefb33f67adc.svg",
+        "img/icons/sponsors.svg": "/static-2017/img/icons/sponsors.3cf80e0dcd9a.svg",
+        "img/icons/venue.svg": "/static-2017/img/icons/venue.4370b746c0cd.svg",
+        "img/icons/background.png": "/static-2017/img/icons/background.e5e4f4cb920f.png",
+        "img/social/about.me.png": "/static-2017/img/social/about.me.f65a5145d048.png",
+        "img/social/facebook.png": "/static-2017/img/social/facebook.287207afff4d.png",
+        "img/social/github.png": "/static-2017/img/social/github.c3ec7b84d61f.png",
+        "img/social/google.png": "/static-2017/img/social/google.fa243b13d494.png",
+        "img/social/linkedin.png": "/static-2017/img/social/linkedin.7ebd98e43085.png",
+        "img/social/twitter.png": "/static-2017/img/social/twitter.d66f6b578aef.png",
+        "img/social/website.png": "/static-2017/img/social/website.e664e4203b87.png"
+        
+      };
+
+      var REGISTRATION = null;
+      var API_DATA = null;
+      var API_DATA_TS = null;
+      var RELEASE = 'v178.0';
+      var UPDATE_NEEDED = false;
+      var SKIP_SW = false;
+    </script>
+    
+    <script type="text/x-template" id="tpl-404">
+      <div class="page-404">
+  <h1>Page Not Found</h1>
+</div>
+    </script>
+    <script type="text/x-template" id="tpl-widgets-side-nav">
+      <div class="sidenav-wrapper">
+  <md-sidenav class="md-right md-fixed" ref="rightSidenav" @open="open('Right')" @close="close('Right')">
+    <md-toolbar>
+      <div class="md-toolbar-container">
+        <h3 class="md-title">Site Nav</h3>
+      </div>
+    </md-toolbar>
+    <md-list>
+      <md-list-item v-for="(link, index) in links" :key="index">
+        <div>
+          <md-button v-if="!link.external" class="md-accent txicon" @click="goto(link.url)">
+            <md-icon :md-src="link.icon"></md-icon>
+            {{ link.name }}
+          </md-button>
+          <md-button v-if="link.external" class="md-accent txicon" @click="closeRightSidenav" :href="link.url" target="_blank">
+            <md-icon :md-src="link.icon"></md-icon>
+            {{ link.name }}
+          </md-button>
+          <md-divider></md-divider>
+        </div>
+      </md-list-item>
+      <md-list-item>
+        <div>
+          <md-button class="md-primary" @click="closeRightSidenav">Close Nav</md-button>
+        </div>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
+</div>
+    </script>
+    <script type="text/x-template" id="tpl-widgets-left-nav">
+      <div class="leftnav-wrapper">
+  <md-list>
+    <md-list-item v-for="(link, index) in links" :key="index">
+      <md-button v-if="!link.external" class="md-accent txicon" @click="goto(link.url)">
+        <md-icon :md-src="link.icon"></md-icon>
+        <div>{{ link.name }}</div>
+      </md-button>
+      <md-button v-if="link.external" class="md-accent txicon" target="_blank" :href="link.url">
+        <md-icon :md-src="link.icon"></md-icon>
+        <div>{{ link.name }}</div>
+      </md-button>
+    </md-list-item>
+  </md-list>
+</div>
+
+    </script>
+    <script type="text/x-template" id="tpl-widgets-top-bar">
+      <div class="topbar-wrapper">
+  <md-toolbar class="topbar">
+    <div>
+      <router-link :to="{name: 'home'}">
+        <img :src="'img/icon.svg' | image" alt="PyTexas">
+      </router-link>
+      <h2>
+        <router-link :to="{name: 'home'}">
+          PyTexas 2017
+        </router-link>
+      </h2>
+      <div class="hamburger">
+        <md-button class="md-icon-button" @click="toggle">
+          <md-icon>menu</md-icon>
+        </md-button>
+      </div>
+    </div>
+  </md-toolbar>
+</div>
+
+    </script>
+    <script type="text/x-template" id="tpl-widgets-sub-nav">
+      <div class="tab-nav">
+  <div v-if="tabs">
+    <md-tabs @change="onChange">
+      <md-tab v-for="(tab, index) in tabs" :md-label="tab.name" :md-active="tab.active" :key="index"/>
+    </md-tabs>
+  </div>
+</div>
+
+    </script>
+    <script type="text/x-template" id="tpl-dialogs-message">
+      <md-dialog class="msg-dialog" :ref="ref" @close="onClose">
+  <md-dialog-title :class="title_class">
+    <md-icon>{{ icon }}</md-icon> {{ title }}
+  </md-dialog-title>
+  <md-dialog-content>
+    {{ message }}
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button class="md-primary" @click="close()">Ok</md-button>
+  </md-dialog-actions>
+</md-dialog>
+
+    </script>
+    <script type="text/x-template" id="tpl-pages-md-page">
+      <div class="md-page">
+  <md-card>
+    <md-card-header>
+      <h1>
+        {{ title }}
+      </h1>
+      <md-icon :md-src="icon"></md-icon>
+    </md-card-header>
+    <md-card-content>
+      <div v-html="html"></div>
+    </md-card-content>
+  </md-card>
+  <component :is="current_dialog"></component>
+</div>
+
+    </script>
+    <script type="text/x-template" id="tpl-pages-videos">
+      <div class="videos">
+  <md-card>
+    <md-card-content>
+      <h1>Videos</h1>
+      <table>
+        <tr v-for="s in sessions" :key="s.id">
+          <td>
+            <a :href="s.videoUrl" target="_blank">
+              {{ s.name }}
+              <span v-if="s.user && s.user.name">
+                by {{ s.user.name }}
+              </span> 
+            </a>
+          </td>
+          <td>
+            <a v-if="s.slides" :href="s.slides" target="_blank">
+              Slides
+            </a>
+          </td>
+          <td class="date">
+            {{ s.day }} 
+            {{ s.startStr }}
+          </td>
+        </tr>
+      </table>
+    </md-card-content>
+  </md-card>
+</div>
+    </script>
+    <script type="text/x-template" id="tpl-pages-program">
+      <div class="program-page">
+  <md-card>
+    <md-card-content>
+      <h1>Schedule - {{ title }}</h1>
+      <div class="container" v-for="container in sessions">
+        <div v-if="container.allRooms" class="all">
+          <program-session :session="container"></program-session>
+        </div>
+        <div v-if="!container.allRooms" class="rooms">
+          <div v-for="room in rooms" class="room">
+            <div v-for="s in container[room]">
+              <program-session :session="s"></program-session>
+            </div>
+          </div>
+        </div>
+      </div>
+    </md-card-content>
+  </md-card>
+</div>
+
+    </script>
+    <script type="text/x-template" id="tpl-pages-home">
+      <div class="home-page">
+  <md-card>
+    <md-card-content>
+      <h1>PyTexas 2017</h1>
+      <p>
+        Another great PyTexas, see you next year!
+      </p>
+      <p>
+        <strong>
+          <router-link to="/videos">
+            Videos are now published
+          </router-link>
+        </strong>
+      </p>
+      <br><br>
+      <img :src="'img/atx.svg' | image" alt="ATX" class="atx">
+      <h2>November 18<sup>th</sup>-19<sup>th</sup>, Austin Texas</h2>
+      <h3>
+        Venue:
+        <a href="https://www.galvanize.com/austin/campus" target="_blank">
+          Galvanize Austin
+        </a> -
+        <a href="https://goo.gl/maps/gkkQaKKugPs" target="_blank">
+          119 Nueces St
+        </a>
+      </h3>
+      <div class="main-links">
+        <p>
+          <md-button href="https://pytexas-slack.herokuapp.com/" target="_blank" class="md-raised">
+            <md-icon>chat</md-icon>
+            Chat Room
+          </md-button>
+          <router-link tag="md-button" to="/program" class="md-raised">
+            <md-icon>mic</md-icon>
+            Talk Schedule
+          </router-link>
+        </p>
+      </div>
+    </md-card-content>
+  </md-card>
+
+  <md-divider/>
+
+  <md-card>
+    <md-card-header-text>
+      <h1>Keynote Speakers</h1>
+    </md-card-header-text>
+    <md-card class="keynote" v-for="(keynote, index) in keynotes" :key="keynote.slug">
+    <md-card-header>
+      <md-layout v-if="index % 2 === 0">
+        <md-layout md-hide-small-and-up>
+          <md-avatar>
+            <img :src="resize('/' + keynote.user.avatar, 256, 256)">
+          </md-avatar>
+        </md-layout>
+        <md-layout md-flex-xsmall="100" md-flex-medium="50" md-flex-large="66">
+          <md-card-header-text>
+            <div class="md-title">
+              <router-link :to="{name: 'speaker', params: {id: keynote.user.id}}">
+                {{ keynote.user.name }}
+              </router-link>
+            </div>
+            <div class="md-subhead">{{ keynote.user.title }}</div>
+            <div class="md-card-content" v-html="keynote.user.biography"></div>
+          </md-card-header-text>
+        </md-layout>
+        <md-layout md-flex md-hide-xsmall md-flex-medium="50" md-flex-large="33">
+          <md-avatar>
+            <img :src="resize('/' + keynote.user.avatar, 256, 256)">
+          </md-avatar>
+        </md-layout>
+        </md-layout>
+      </md-layout>
+      <md-layout v-else>
+        <md-layout md-hide-small-and-up>
+          <md-avatar>
+            <img :src="resize('/' + keynote.user.avatar, 256, 256)">
+          </md-avatar>
+        </md-layout>
+
+        <md-layout md-flex md-hide-xsmall md-flex-medium="50" md-flex-large="33">
+          <md-avatar>
+            <img :src="resize('/' + keynote.user.avatar, 256, 256)">
+          </md-avatar>
+        </md-layout>
+        <md-layout md-flex-xsmall="100" md-flex-medium="50" md-flex-large="66">
+          <md-card-header-text>
+            <div class="md-title">
+              <router-link :to="{name: 'speaker', params: {id: keynote.user.id}}">
+                {{ keynote.user.name }}
+              </router-link>
+            </div>
+            <div class="md-subhead">{{ keynote.user.title }}</div>
+            <div class="md-card-content" v-html="keynote.user.biography"></div>
+          </md-card-header-text>
+        </md-layout>
+      </md-layout>
+    </md-card-header>
+  </md-card>
+  </md-card>
+
+  <md-divider/>
+
+  <md-card>
+    <md-card-header-text>
+      <h1>Our Sponsors</h1>
+    </md-card-header-text>
+    <div class="level" v-for="level in sponsors">
+      <h4>{{ level.name }}</h4>
+      <a v-for="s in level.sponsors" :href="s.url" target="_blank">
+        <img :src="resize(s.logoUrl, 150, 150)" :alt="s.name">
+      </a>
+    </div>
+  </md-card>
+</div>
+
+    </script>
+    <script type="text/x-template" id="tpl-pages-sponsors">
+      <div class="sponsors-page">
+  <md-card>
+    <md-card-content>
+      <h1>PyTexas Sponsors</h1>
+      <div class="level" v-for="level in sponsors">
+        <h4>{{ level.name }}</h4>
+        <a v-for="s in level.sponsors" :href="s.url" target="_blank">
+          <img :src="resize(s.logoUrl, 250, 250)" :alt="s.name">
+        </a>
+      </div>
+    </md-card-content>
+  </md-card>
+</div>
+    </script>
+    <script type="text/x-template" id="tpl-pages-session">
+      <div class="session">
+  <h2>
+    <router-link :to="{name: 'talk', params: {id: session.id}}">
+      {{ session.name }}
+    </router-link>
+  </h2>
+  <h3>
+    <router-link :to="{name: 'speaker', params: {id: session.user.id}}">
+      {{ session.user.name }}
+    </router-link>
+  </h3>
+  <h4>
+    {{ session.startStr }} - {{ session.endStr }}
+  </h4>
+  <h5 v-if="session.room && !session.allRooms">
+    {{ session.room.name }}
+  </h5>
+  <div v-html="html"></div>
+</div>
+    </script>
+    <script type="text/x-template" id="tpl-pages-talk">
+      <div class="talk-page">
+  <md-card v-if="talk">
+    <md-card-content>
+      <div v-if="talk.user.image" class="speakimg">
+        <md-avatar>
+          <router-link :to="{name: 'speaker', params: {id: talk.user.id}}">
+            <img :src="resize(talk.user.image, 256, 256)">
+          </router-link>
+        </md-avatar>
+      </div>
+      <h1>
+        Talk: {{ talk.name }}
+      </h1>
+      <h3>
+        <router-link :to="{name: 'speaker', params: {id: talk.user.id}}">
+          {{ talk.user.name }}
+        </router-link>
+      </h3>
+      <h4>
+        {{ talk.startStr }} - {{ talk.endStr }}
+      </h4>
+      <h5 v-if="talk.room && !talk.allRooms">
+        {{ talk.room.name }}
+      </h5>
+      <div v-if="talk.slides || talk.videoUrl">
+        <md-button target="_blank" class="md-raised" :href="talk.slides" v-if="talk.slides">
+          <md-icon>slideshow</md-icon>
+          Slides
+        </md-button>
+        <md-button target="_blank" class="md-raised" :href="talk.videoUrl" v-if="talk.videoUrl">
+          <md-icon>videocam</md-icon>
+          Video
+        </md-button>
+      </div>
+      <div v-html="html"></div>
+    </md-card-content>
+  </md-card>
+</div>
+
+    </script>
+    <script type="text/x-template" id="tpl-pages-speaker">
+      <md-card v-if="speaker" class="speaker-page">
+  <md-card-content>
+    <md-layout>
+      <md-layout v-if="speaker.image" md-hide-small-and-up md-flex-xsmall="100">
+        <md-avatar>
+          <img :src="resize(speaker.image, 256, 256)">
+        </md-avatar>
+      </md-layout>
+      <md-layout md-flex-large="66" md-flex-xsmall="100">
+        <div>
+          <h1>{{ speaker.name }}</h1>
+          <h2>{{ speaker.title }}</h2>
+          <h3>{{ speaker.location }}</h3>
+        </div>
+      </md-layout>
+      <md-layout v-if="speaker.image" md-flex-large="33" md-hide-xsmall>
+        <md-avatar>
+          <img :src="resize(speaker.image, 256, 256)">
+        </md-avatar>
+      </md-layout>
+      <md-layout v-html="bio" md-flex-large="100"></md-layout>
+      <md-layout v-if="speaker.session" md-flex-large="100">
+        <h2>
+          Talk:
+          <router-link :to="{name: 'talk', params: {id: speaker.session.id}}">
+            {{ speaker.session.name }}
+          </router-link>
+        </h2>
+      </md-layout>
+      <md-layout md-flex-large="100">
+        <p>
+          <span v-if="speaker.website">
+            <md-button :href="speaker.website" target="_blank" class="md-raised">
+              <md-icon :md-src="image('img/social/website.png')"></md-icon>
+              Website
+            </md-button>
+          </span>
+          <span v-if="speaker.socialHandles && speaker.socialHandles.edges.length > 0">
+            <md-button :href="social_link(h.node)" target="_blank" v-for="h in speaker.socialHandles.edges" :key="h.node.id" class="md-raised">
+              <md-icon :md-src="social_icon(h.node)"></md-icon>
+              {{ h.node.username }}
+            </md-button>
+          </span>
+        </p>
+      </md-layout>
+    </md-layout>
+  </md-card-content>
+</md-card>
+
+    </script>
+    
+    <script src="/static-2017/vue.min.9cfa15852463.js"></script>
+    <script src="/static-2017/vue-router.min.2dc682ede8db.js"></script>
+    <script src="/static-2017/vue-material.bfe0c176b18c.js"></script>
+    <script src="/static-2017/raven.min.a6bd262f14b4.js"></script>
+    <script src="/static-2017/plugins/vue.min.6d109d7d9669.js"></script>
+    <script src="/static-2017/axios.min.848cc157033c.js"></script>
+    <script src="/static-2017/showdown.min.db406d2515b7.js"></script>
+    <script src="/static-2017/2017-dist/pytx.1f77f36c8c01.js"></script>
+  </body>
+</html>

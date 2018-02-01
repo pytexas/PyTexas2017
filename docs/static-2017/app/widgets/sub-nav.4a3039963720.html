@@ -1,0 +1,7 @@
+<div class="tab-nav">
+  <div v-if="tabs">
+    <md-tabs @change="onChange">
+      <md-tab v-for="(tab, index) in tabs" :md-label="tab.name" :md-active="tab.active" :key="index"/>
+    </md-tabs>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="session">
+  <h2>
+    <router-link :to="{name: 'talk', params: {id: session.id}}">
+      {{ session.name }}
+    </router-link>
+  </h2>
+  <h3>
+    <router-link :to="{name: 'speaker', params: {id: session.user.id}}">
+      {{ session.user.name }}
+    </router-link>
+  </h3>
+  <h4>
+    {{ session.startStr }} - {{ session.endStr }}
+  </h4>
+  <h5 v-if="session.room && !session.allRooms">
+    {{ session.room.name }}
+  </h5>
+  <div v-html="html"></div>
+</div>

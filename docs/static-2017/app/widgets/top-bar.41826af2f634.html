@@ -1,0 +1,19 @@
+<div class="topbar-wrapper">
+  <md-toolbar class="topbar">
+    <div>
+      <router-link :to="{name: 'home'}">
+        <img :src="'img/icon.svg' | image" alt="PyTexas">
+      </router-link>
+      <h2>
+        <router-link :to="{name: 'home'}">
+          PyTexas 2017
+        </router-link>
+      </h2>
+      <div class="hamburger">
+        <md-button class="md-icon-button" @click="toggle">
+          <md-icon>menu</md-icon>
+        </md-button>
+      </div>
+    </div>
+  </md-toolbar>
+</div>

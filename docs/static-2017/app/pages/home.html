@@ -1,0 +1,115 @@
+<div class="home-page">
+  <md-card>
+    <md-card-content>
+      <h1>PyTexas 2017</h1>
+      <p>
+        Another great PyTexas, see you next year!
+      </p>
+      <p>
+        <strong>
+          <router-link to="/videos">
+            Videos are now published
+          </router-link>
+        </strong>
+      </p>
+      <br><br>
+      <img :src="'img/atx.svg' | image" alt="ATX" class="atx">
+      <h2>November 18<sup>th</sup>-19<sup>th</sup>, Austin Texas</h2>
+      <h3>
+        Venue:
+        <a href="https://www.galvanize.com/austin/campus" target="_blank">
+          Galvanize Austin
+        </a> -
+        <a href="https://goo.gl/maps/gkkQaKKugPs" target="_blank">
+          119 Nueces St
+        </a>
+      </h3>
+      <div class="main-links">
+        <p>
+          <md-button href="https://pytexas-slack.herokuapp.com/" target="_blank" class="md-raised">
+            <md-icon>chat</md-icon>
+            Chat Room
+          </md-button>
+          <router-link tag="md-button" to="/program" class="md-raised">
+            <md-icon>mic</md-icon>
+            Talk Schedule
+          </router-link>
+        </p>
+      </div>
+    </md-card-content>
+  </md-card>
+
+  <md-divider/>
+
+  <md-card>
+    <md-card-header-text>
+      <h1>Keynote Speakers</h1>
+    </md-card-header-text>
+    <md-card class="keynote" v-for="(keynote, index) in keynotes" :key="keynote.slug">
+    <md-card-header>
+      <md-layout v-if="index % 2 === 0">
+        <md-layout md-hide-small-and-up>
+          <md-avatar>
+            <img :src="resize('/' + keynote.user.avatar, 256, 256)">
+          </md-avatar>
+        </md-layout>
+        <md-layout md-flex-xsmall="100" md-flex-medium="50" md-flex-large="66">
+          <md-card-header-text>
+            <div class="md-title">
+              <router-link :to="{name: 'speaker', params: {id: keynote.user.id}}">
+                {{ keynote.user.name }}
+              </router-link>
+            </div>
+            <div class="md-subhead">{{ keynote.user.title }}</div>
+            <div class="md-card-content" v-html="keynote.user.biography"></div>
+          </md-card-header-text>
+        </md-layout>
+        <md-layout md-flex md-hide-xsmall md-flex-medium="50" md-flex-large="33">
+          <md-avatar>
+            <img :src="resize('/' + keynote.user.avatar, 256, 256)">
+          </md-avatar>
+        </md-layout>
+        </md-layout>
+      </md-layout>
+      <md-layout v-else>
+        <md-layout md-hide-small-and-up>
+          <md-avatar>
+            <img :src="resize('/' + keynote.user.avatar, 256, 256)">
+          </md-avatar>
+        </md-layout>
+
+        <md-layout md-flex md-hide-xsmall md-flex-medium="50" md-flex-large="33">
+          <md-avatar>
+            <img :src="resize('/' + keynote.user.avatar, 256, 256)">
+          </md-avatar>
+        </md-layout>
+        <md-layout md-flex-xsmall="100" md-flex-medium="50" md-flex-large="66">
+          <md-card-header-text>
+            <div class="md-title">
+              <router-link :to="{name: 'speaker', params: {id: keynote.user.id}}">
+                {{ keynote.user.name }}
+              </router-link>
+            </div>
+            <div class="md-subhead">{{ keynote.user.title }}</div>
+            <div class="md-card-content" v-html="keynote.user.biography"></div>
+          </md-card-header-text>
+        </md-layout>
+      </md-layout>
+    </md-card-header>
+  </md-card>
+  </md-card>
+
+  <md-divider/>
+
+  <md-card>
+    <md-card-header-text>
+      <h1>Our Sponsors</h1>
+    </md-card-header-text>
+    <div class="level" v-for="level in sponsors">
+      <h4>{{ level.name }}</h4>
+      <a v-for="s in level.sponsors" :href="s.url" target="_blank">
+        <img :src="resize(s.logoUrl, 150, 150)" :alt="s.name">
+      </a>
+    </div>
+  </md-card>
+</div>

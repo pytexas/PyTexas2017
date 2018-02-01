@@ -1,0 +1,38 @@
+<div class="talk-page">
+  <md-card v-if="talk">
+    <md-card-content>
+      <div v-if="talk.user.image" class="speakimg">
+        <md-avatar>
+          <router-link :to="{name: 'speaker', params: {id: talk.user.id}}">
+            <img :src="resize(talk.user.image, 256, 256)">
+          </router-link>
+        </md-avatar>
+      </div>
+      <h1>
+        Talk: {{ talk.name }}
+      </h1>
+      <h3>
+        <router-link :to="{name: 'speaker', params: {id: talk.user.id}}">
+          {{ talk.user.name }}
+        </router-link>
+      </h3>
+      <h4>
+        {{ talk.startStr }} - {{ talk.endStr }}
+      </h4>
+      <h5 v-if="talk.room && !talk.allRooms">
+        {{ talk.room.name }}
+      </h5>
+      <div v-if="talk.slides || talk.videoUrl">
+        <md-button target="_blank" class="md-raised" :href="talk.slides" v-if="talk.slides">
+          <md-icon>slideshow</md-icon>
+          Slides
+        </md-button>
+        <md-button target="_blank" class="md-raised" :href="talk.videoUrl" v-if="talk.videoUrl">
+          <md-icon>videocam</md-icon>
+          Video
+        </md-button>
+      </div>
+      <div v-html="html"></div>
+    </md-card-content>
+  </md-card>
+</div>

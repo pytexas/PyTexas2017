@@ -1,0 +1,23 @@
+@import "styles";
+
+.videos {
+  table {
+    border-collapse: collapse;
+    
+    td {
+      font-size: 90%;
+      padding: 8px 12px;
+    }
+    
+    td.date {
+      font-size: 70%;
+      white-space: nowrap;
+    }
+    
+    tr:nth-child(odd) {
+      td {
+        background-color: lighten(@lightPrimaryColor, 10%);
+      }
+    }
+  }
+}

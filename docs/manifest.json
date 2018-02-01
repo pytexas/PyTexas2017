@@ -1,0 +1,25 @@
+{
+    
+    "name": "PyTexas 2017",
+    "description": "PyTexas 2017 Conference",
+    "developer": {
+      "name": "PyTexas",
+      "url": "http://2017.pytexas.org"
+    },
+    "start_url": "/2017/",
+    "icons": [
+        {
+            "src": "/static-2017/img/manifest/android-chrome-192x192.4b1fbeebf7c1.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/static-2017/img/manifest/android-chrome-512x512.99ed3be70b24.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#bdbdbd",
+    "background_color": "#bdbdbd",
+    "display": "standalone"
+}

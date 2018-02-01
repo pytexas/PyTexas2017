@@ -1,0 +1,14 @@
+<div class="md-page">
+  <md-card>
+    <md-card-header>
+      <h1>
+        {{ title }}
+      </h1>
+      <md-icon :md-src="icon"></md-icon>
+    </md-card-header>
+    <md-card-content>
+      <div v-html="html"></div>
+    </md-card-content>
+  </md-card>
+  <component :is="current_dialog"></component>
+</div>

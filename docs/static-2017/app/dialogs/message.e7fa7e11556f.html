@@ -1,0 +1,11 @@
+<md-dialog class="msg-dialog" :ref="ref" @close="onClose">
+  <md-dialog-title :class="title_class">
+    <md-icon>{{ icon }}</md-icon> {{ title }}
+  </md-dialog-title>
+  <md-dialog-content>
+    {{ message }}
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button class="md-primary" @click="close()">Ok</md-button>
+  </md-dialog-actions>
+</md-dialog>

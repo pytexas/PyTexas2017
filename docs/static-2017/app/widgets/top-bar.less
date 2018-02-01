@@ -1,0 +1,34 @@
+@import "media";
+@import "styles";
+
+.topbar-wrapper {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.md-toolbar.topbar {
+  a {
+    color: @textPrimaryColor !important;
+  }
+
+  img {
+    width: 42px;
+    margin-right: 10px;
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    h2 {
+      flex: 1;
+    }
+  }
+}

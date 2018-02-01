@@ -590,7 +590,7 @@ var Routes = [
 
 
 var router = new VueRouter({
-  base: "/2017",
+  base: "",
   mode: "history",
   routes: Routes,
   scrollBehavior: function(to, from, savedPosition) {

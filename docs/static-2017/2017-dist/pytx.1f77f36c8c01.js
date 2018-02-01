@@ -794,9 +794,7 @@ var SubNav = Vue$1.component("sub-nav", {
 });
 
 if (!DEBUG) {
-  Raven.config("https://48afdd6633574781814c36e6c0d2a69f@sentry.io/212458")
-    .addPlugin(Raven.Plugins.Vue, Vue$1)
-    .install();
+  
 }
 
 Vue$1.use(VueRouter);

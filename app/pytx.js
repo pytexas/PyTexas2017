@@ -92,8 +92,19 @@ function clear_all_cache(NEWEST_RELEASE) {
   }
 }
 
+function uninstall () {
+  navigator.serviceWorker.getRegistration().then(function(registration) {
+    if (registration) {
+      console.log('uninstalling');
+      registration.unregister();
+    }
+  });
+}
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function() {
+    return uninstall();
+    
     if (SKIP_SW) {
       start_socket();
       return;
@@ -121,6 +132,9 @@ if ("serviceWorker" in navigator) {
 }
 
 function start_socket() {
+  // turning off socket for now
+  return;
+  
   console.log("Starting Socket");
   var url = URLS.main + "/release-stream";
 

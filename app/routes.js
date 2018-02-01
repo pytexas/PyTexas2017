@@ -6,6 +6,7 @@ import Sponsors from "./pages/sponsors";
 import Program from "./pages/program";
 import Talk from "./pages/talk";
 import Speaker from "./pages/speaker";
+import Videos from "./pages/videos";
 
 const NotFound = { template: "#tpl-404" };
 
@@ -25,6 +26,7 @@ export var Routes = [
   { path: "/program", name: "current-program", redirect: current_schedule },
   { path: "/speaker/:id", name: "speaker", component: Speaker, props: true },
   { path: "/talk/:id", name: "talk", component: Talk, props: true },
+  { path: "/videos", name: "videos", component: Videos },
   { path: "/", name: "home", component: Home },
   { path: "*", component: NotFound }
 ];

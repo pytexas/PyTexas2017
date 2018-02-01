@@ -138,6 +138,29 @@ export function extract_sessions(data, day) {
   });
 }
 
+export function extract_videos(data) {
+  var videos = [];
+
+  extract_nodes(data.allSessions.edges).forEach(function(session) {
+    session.slug = session.name.toLowerCase().replace(/\s+/g, "-");
+    session.start = new Date(session.start);
+    
+    if (session.videoUrl) {
+      videos.push(session);
+    }
+  });
+
+  return videos.sort(function(a, b) {
+    if (a.start < b.start) {
+      return -1;
+    } else if (a.start > b.start) {
+      return 1;
+    }
+
+    return 0;
+  });
+}
+
 export function extract_keynotes(data) {
   return extract_nodes(data.allKeynotes.edges).map(function(keynote) {
     keynote.slug = keynote.name.toLowerCase().replace(/\s+/g, "-");
